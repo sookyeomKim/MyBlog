@@ -1,0 +1,261 @@
+.main-container.home {
+    #introduce {
+        margin: 20px 0 120px;
+        .first-img {
+            position: absolute;
+            left: 50%;
+            width: 400px;
+            margin-left: -200px;
+            margin-top: -100px;
+            opacity: 0.35;
+            border-radius: 20%/60%;
+        }
+        .first-text {
+            color: #e47911;
+            p {
+                line-height: 1.1;
+            }
+        }
+
+        .second-text {
+            padding-top: 20px;
+            .left-text {
+                font-size: 18px;
+                padding-left: 50px;
+            }
+            .right-text {
+                padding-left: 150px;
+            }
+        }
+
+        .third-text {
+            position: relative;
+            padding-top: 50px;
+            p {
+                padding-top: 15px;
+            }
+
+            .second-img, .third-img {
+                width: 50px;
+                border-radius: 50%;
+                opacity: 0.6;
+            }
+
+            .second-img {
+                float: left;
+                margin-right: 10px;
+            }
+            .third-img {
+                float: right;
+                margin-left: 10px;
+            }
+
+            .left-title, .right-title {
+                border-bottom: 1px solid #ddd;
+                line-height: 1.6;
+            }
+            .left-title {
+                text-align: right;
+            }
+            .right-title {
+                text-align: left;
+            }
+        }
+    }
+
+    #info {
+        position: relative;
+        margin-bottom: 120px;
+        img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            opacity: 0.5;
+            width: 350px;
+            z-index: -1;
+        }
+    }
+
+    #portfolio {
+        text-align: center;
+        margin-bottom: 120px;
+        .first {
+            margin: 0 auto;
+        }
+    }
+    #contact {
+        margin-bottom: 120px;
+        .contact-wrap {
+            max-width: 410px;
+            margin: 0 auto;
+            .button-form {
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1279px) {
+    .main-container.home {
+        #introduce {
+            .second-text {
+                .right-text {
+                    padding-left: 140px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 959px) {
+    .main-container.home {
+        #introduce {
+            .second-text {
+                .left-text {
+                    padding-left: 30px;
+                }
+            }
+            .second-text {
+                .right-text {
+                    padding-left: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .main-container.home {
+        #introduce {
+            .second-text, .third-text {
+                padding-top: 0;
+            }
+            .second-text {
+                .left-text {
+                    padding-bottom: 30px;
+                }
+                .left-text, .right-text {
+                    text-align: center;
+                }
+            }
+            .third-text {
+                .left-text {
+                    padding-bottom: 60px;
+                }
+            }
+        }
+    }
+}
+
+.wrap {
+    max-width: 65%;
+    margin: 50px auto;
+    padding-left: 23px;
+    border-left: 6px solid #e47911;
+    border-radius: 0%;
+}
+
+.wrap li {
+    margin: 3.5em 0;
+    list-style-type: none;
+    position: relative;
+}
+
+.wrap li input {
+    display: none;
+}
+
+.wrap li .lab {
+    margin: 15px 0 10px;
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.wrap li .date {
+    position: absolute;
+    left: -100px;
+    top: 50%;
+    margin-top: -7px;
+    font-size: 14px;
+    color: #e47911;
+}
+
+.wrap li .circle {
+    width: 12.5px;
+    height: 12.5px;
+    position: absolute;
+    left: -32.5px;
+    top: 50%;
+    margin-top: -2px;
+    border: 3px solid #e47911;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.wrap li .content {
+    max-height: 50px;
+    border: 2px solid transparent;
+    padding: 0px 10px 20px 0px;
+    border-radius: 10px;
+    position: relative;
+    transition: max-height 0.3s linear, border-color 0.3s linear, transform 0.2s ease, padding 0.3s linear;
+}
+
+.wrap li .content p {
+    font-size: 14px;
+    color: transparent;
+    transition: color 0.2s linear;
+}
+
+.wrap li .content:before, .wrap li .content:after {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    border: solid transparent;
+    content: "";
+}
+
+.wrap li .content:before {
+    border-width: 15px;
+    border-right-color: inherit;
+    margin-top: -12px;
+}
+
+.wrap li .content:after {
+    border-width: 13px;
+    border-right-color: #fff;
+    margin-top: -10px;
+}
+
+input:checked ~ .content {
+    max-height: 350px;
+    padding-left: 20px;
+    border-color: #e47911;
+    transform: translate3D(20px, 0, 0);
+}
+
+input:checked ~ .content p {
+    color: #e47911;
+    transition-delay: 0.3s;
+    transition-duration: 0.5s;
+}
+
+input:checked ~ .content .lab {
+    cursor: auto;
+}
+
+@media only screen and (max-width: 350px) {
+    .wrap {
+        max-width: 55%;
+    }
+    input:checked ~ .content {
+        max-height: 450px;
+    }
+    .wrap li .lab {
+        font-size: 16px;
+    }
+}
