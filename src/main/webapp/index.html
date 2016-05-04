@@ -13,21 +13,31 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css"/>
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
+    <link rel="stylesheet" href="bower_components/codemirror/theme/dracula.css">
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
+    <link rel="stylesheet" href="app/customPlugins/owlCaroulsel/plugin/css/owl.carousel.css">
+    <link rel="stylesheet" href="app/customPlugins/owlCaroulsel/plugin/css/owl.theme.css">
     <!-- endbuild -->
 </head>
 <body ng-controller="globalController as vm">
 <!--[if lt IE 9]>
 <p class="browserupgrade"><a href="http://browsehappy.com/">브라우저를 업데이트 해주세요!</a></p>
 <![endif]-->
-<div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak></div>
+
+<!--head-->
 <div ui-view="navbar" ng-cloak></div>
+<!--head end-->
+
+<!--body-->
 <div class="entire-container" ui-view="content"></div>
+<!--body end-->
 
 <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
 <script>
@@ -61,12 +71,18 @@
 <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
 <script src="bower_components/angular-media-queries/match-media.js"></script>
 <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="bower_components/clipboard/dist/clipboard.js"></script>
+<script src="bower_components/ngclipboard/dist/ngclipboard.js"></script>
+<script src="bower_components/codemirror/lib/codemirror.js"></script>
+<script src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js app/app.js  -->
 <!-- inject:js -->
 <script src="app/app.module.js"></script>
+<script src="app/customPlugins/owlCaroulsel/plugin/js/carousel.drective.js"></script>
+<script src="app/customPlugins/owlCaroulsel/plugin/js/carousel.controller.js"></script>
 <script src="app/components/util/directive/whResize.directive.js"></script>
 <script src="app/components/util/directive/sort.directive.js"></script>
 <script src="app/components/util/directive/sort-by.directive.js"></script>
@@ -77,7 +93,6 @@
 <script src="app/account/reset/request/reset.request.controller.js"></script>
 <script src="app/account/reset/finish/reset.finish.state.js"></script>
 <script src="app/account/reset/finish/reset.finish.controller.js"></script>
-<script src="app/services/user/user.service.js"></script>
 <script src="app/services/auth/register.service.js"></script>
 <script src="app/services/auth/principal.service.js"></script>
 <script src="app/services/auth/password.service.js"></script>
@@ -89,15 +104,18 @@
 <script src="app/services/auth/auth.jwt.service.js"></script>
 <script src="app/services/auth/activate.service.js"></script>
 <script src="app/services/auth/account.service.js"></script>
+<script src="app/services/user/user.service.js"></script>
 <script src="app/layouts/navbar/navbar.controller.js"></script>
 <script src="app/layouts/navbar/active-link.directive.js"></script>
+<script src="app/layouts/error/error.state.js"></script>
+<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.state.js"></script>
+<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.controller.js"></script>
 <script src="app/entities/contact/contact.state.js"></script>
 <script src="app/entities/contact/contact.service.js"></script>
 <script src="app/entities/contact/contact.controller.js"></script>
 <script src="app/entities/contact/contact-dialog.controller.js"></script>
 <script src="app/entities/contact/contact-detail.controller.js"></script>
 <script src="app/entities/contact/contact-delete-dialog.controller.js"></script>
-<script src="app/layouts/error/error.state.js"></script>
 <script src="app/components/util/truncate-words.filter.js"></script>
 <script src="app/components/util/truncate-characters.filter.js"></script>
 <script src="app/components/util/parse-links.service.js"></script>
@@ -114,34 +132,34 @@
 <script src="app/components/form/pagination.constants.js"></script>
 <script src="app/components/form/minbytes.directive.js"></script>
 <script src="app/components/form/maxbytes.directive.js"></script>
+<script src="app/components/alert/alert.service.js"></script>
+<script src="app/components/alert/alert.directive.js"></script>
+<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/blocks/interceptor/notification.interceptor.js"></script>
 <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
 <script src="app/blocks/interceptor/auth.interceptor.js"></script>
 <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
-<script src="app/components/alert/alert.service.js"></script>
-<script src="app/components/alert/alert.directive.js"></script>
-<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/blocks/handlers/state.handler.js"></script>
 <script src="app/blocks/config/localstorage.config.js"></script>
 <script src="app/blocks/config/http.config.js"></script>
 <script src="app/blocks/config/compile.config.js"></script>
 <script src="app/blocks/config/alert.config.js"></script>
-<script src="app/admin/metrics/metrics.state.js"></script>
-<script src="app/admin/metrics/metrics.service.js"></script>
-<script src="app/admin/metrics/metrics.modal.controller.js"></script>
-<script src="app/admin/metrics/metrics.controller.js"></script>
 <script src="app/admin/user-management/user-management.state.js"></script>
 <script src="app/admin/user-management/user-management.controller.js"></script>
 <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
 <script src="app/admin/user-management/user-management-detail.controller.js"></script>
 <script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
+<script src="app/admin/metrics/metrics.state.js"></script>
+<script src="app/admin/metrics/metrics.service.js"></script>
+<script src="app/admin/metrics/metrics.modal.controller.js"></script>
+<script src="app/admin/metrics/metrics.controller.js"></script>
+<script src="app/admin/logs/logs.state.js"></script>
+<script src="app/admin/logs/logs.service.js"></script>
+<script src="app/admin/logs/logs.controller.js"></script>
 <script src="app/admin/health/health.state.js"></script>
 <script src="app/admin/health/health.service.js"></script>
 <script src="app/admin/health/health.modal.controller.js"></script>
 <script src="app/admin/health/health.controller.js"></script>
-<script src="app/admin/logs/logs.state.js"></script>
-<script src="app/admin/logs/logs.service.js"></script>
-<script src="app/admin/logs/logs.controller.js"></script>
 <script src="app/admin/docs/docs.state.js"></script>
 <script src="app/admin/configuration/configuration.state.js"></script>
 <script src="app/admin/configuration/configuration.service.js"></script>
@@ -164,6 +182,8 @@
 <script src="app/account/activate/activate.controller.js"></script>
 <script src="app/home/home.state.js"></script>
 <script src="app/home/home.controller.js"></script>
+<script src="app/home/home-profile-dialog.controller.js"></script>
+<script src="app/customPlugins/customPlugins.state.js"></script>
 <script src="app/entities/entity.state.js"></script>
 <script src="app/admin/admin.state.js"></script>
 <script src="app/account/account.state.js"></script>

@@ -43,6 +43,10 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.js',
             'src/main/webapp/bower_components/angular-media-queries/match-media.js',
             'src/main/webapp/bower_components/angular-scroll/angular-scroll.js',
+            'src/main/webapp/bower_components/clipboard/dist/clipboard.js',
+            'src/main/webapp/bower_components/ngclipboard/dist/ngclipboard.js',
+            'src/main/webapp/bower_components/codemirror/lib/codemirror.js',
+            'src/main/webapp/bower_components/angular-ui-codemirror/ui-codemirror.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'src/main/webapp/app/app.module.js',

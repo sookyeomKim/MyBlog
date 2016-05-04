@@ -1,9 +1,25 @@
 <div class="row" ng-cloak>
-    <aside class="aside-container col-sm-3" ng-if="!vm.isSm">
+    <aside class="aside-container non-mobile col-sm-3" ng-if="!vm.isXs">
         <div fix-aside wh-resize prop-name="width" ratio="25" max-width="1250">
             <div class="aside-outer-scroller">
                 <div class="aside-inner-scroller" wh-resize prop-name="height" ratio="100">
-                    <div class="profile-wrap" ng-include src="'app/partials/profile.html'"></div>
+                    <div class="profile-wrap">
+                        <div class="img-wrap">
+                            <img wh-resize
+                                 prop-name="width"
+                                 ratio="25"
+                                 max-width="1250"
+                                 margin="10"
+                                 src="/content/images/ksk.jpg"
+                                 alt="썸네일 수겸이 프로필사진">
+                        </div>
+                        <div class="info-wrap">
+                            <p>ikks06luck@naver.com</p>
+
+                            <p>010-3328-8344</p>
+                        </div>
+
+                    </div>
                     <nav>
                         <ul class="side-navbar">
                             <li>
@@ -11,7 +27,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#info" du-smooth-scroll du-scrollspy>Information
+                                <a href="#timeline" du-smooth-scroll du-scrollspy>Timeline
                                 </a>
                             </li>
                             <li>
@@ -71,7 +87,7 @@
                 </div>
             </div>
         </section>
-        <section id="info">
+        <section id="timeline">
             <ul class="wrap">
                 <li>
                     <input type="radio" checked id="s1" name="section"/>
@@ -184,3 +200,34 @@
         </section>
     </main>
 </div>
+
+<aside class="aside-container mobile" ng-if="vm.isXs">
+    <div class="btn-group btn-group-justified btn-group-raised">
+        <a class="btn btn-warning" ui-sref="home.profile">
+            <div uib-tooltip="연락처">
+                <i class="material-icons">&#xE0CF;</i>
+            </div>
+        </a>
+        <a href="#introduce" class="btn" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="소개">
+                <i class="material-icons">&#xE8A6;</i>
+            </div>
+        </a>
+        <a href="#timeline" class="btn btn-warning" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="타임라인">
+                <i class="material-icons">&#xE922;</i>
+            </div>
+        </a>
+        <a href="#portfolio" class="btn" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="포트폴리오">
+                <i class="material-icons">&#xE560;</i>
+            </div>
+        </a>
+        <a href="#contact" class="btn btn-warning" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="메세지 보내기">
+                <i class="material-icons">&#xE0B9;</i>
+            </div>
+        </a>
+    </div>
+</aside>
+

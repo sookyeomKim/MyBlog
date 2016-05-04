@@ -4,6 +4,7 @@
   "appPath": "src/main/webapp/",
   "testPath": "src/test/javascript/spec",
   "dependencies": {
+    "normalize-css": "^4.1.1",
     "angular": "1.5.2",
     "angular-aria": "1.5.2",
     "angular-bootstrap": "1.2.5",
@@ -26,7 +27,10 @@
     "bootstrap-material-design": "^0.5.9",
     "angular-media-queries": "^0.6.0",
     "angular-scroll": "^1.0.0",
-    "owl-carousel": "^1.3.2"
+    "bootstrap-material-design-icons": "^2.2.0",
+    "clipboard": "^1.5.10",
+    "ngclipboard": "^1.1.1",
+    "angular-ui-codemirror": "^0.3.0"
   },
   "devDependencies": {
     "angular-mocks": "1.5.2"
@@ -53,6 +57,9 @@
         "jquery": "2.2.2",
         "bootstrap-sass": "~3.3.6"
       }
+    },
+    "bootstrap-material-design-icons": {
+      "main": "scss/material-icons.scss"
     }
   },
   "resolutions": {

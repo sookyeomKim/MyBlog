@@ -15,7 +15,9 @@
             'infinite-scroll',
             'angular-loading-bar',
             'matchMedia',
-            'duScroll'
+            'duScroll',
+            'ngclipboard',
+            'ui.codemirror'
         ])
         .run(run);
 

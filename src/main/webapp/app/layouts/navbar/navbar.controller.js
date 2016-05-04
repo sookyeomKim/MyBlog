@@ -18,7 +18,7 @@
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
 
-        $.material.init();
+        jQuery.material.init();
 
         function login () {
             collapseNavbar();

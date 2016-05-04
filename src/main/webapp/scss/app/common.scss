@@ -14,7 +14,7 @@
 }
 
 /* 사이드 컨테이너*/
-.aside-container {
+.aside-container.non-mobile {
     padding-left: 0;
     padding-right: 0;
     .side-navbar {
@@ -48,6 +48,20 @@
     .inFixed {
         margin: 0 -17px 0 0;
         overflow-y: scroll;
+    }
+}
+
+.aside-container.mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    .btn-group {
+        margin: 0;
+        .btn {
+            border-radius: 0;
+            font-size: 18px;
+            padding: 5px 0;
+        }
     }
 }
 
@@ -311,5 +325,10 @@ ul#strength {
 .uib-datepicker-popup > li > div.uib-datepicker > table:focus {
     outline: none;
 }
-
 /* end of ui bootstrap tweaks */
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

@@ -9,8 +9,8 @@
 
     function HomeController($scope, screenSize, Contact) {
         var vm = this;
-
-        vm.isSm = getScreenSize();
+        
+        vm.isXs = getScreenSize();
         vm.contact = {
             email: null,
             massage: null,
@@ -19,7 +19,7 @@
 
         function getScreenSize() {
             return screenSize.on('xs', function (match) {
-                return vm.isSm = match;
+                return vm.isXs = match;
             }, $scope);
         }
 
@@ -43,8 +43,12 @@
             return Contact.save(vm.contact, onSaveSuccess, onSaveError);
         };
 
+        vm.clear = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
+
         $scope.$on('$destroy', function () {
-            vm.isSm = null;
+            vm.isXs = null;
         });
     }
 })();

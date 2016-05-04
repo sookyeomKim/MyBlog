@@ -95,7 +95,7 @@
     }
 }
 
-@media only screen and (max-width: 1279px) {
+@media only screen and (max-width: 1199px) {
     .main-container.home {
         #introduce {
             .second-text {
@@ -107,7 +107,7 @@
     }
 }
 
-@media only screen and (max-width: 959px) {
+@media only screen and (max-width: 991px) {
     .main-container.home {
         #introduce {
             .second-text {
@@ -124,18 +124,15 @@
     }
 }
 
-@media only screen and (max-width: 599px) {
+@media only screen and (max-width: 767px) {
     .main-container.home {
         #introduce {
             .second-text, .third-text {
-                padding-top: 0;
+                padding-top: 10px;
             }
             .second-text {
                 .left-text {
-                    padding-bottom: 30px;
-                }
-                .left-text, .right-text {
-                    text-align: center;
+                    padding-bottom: 15px;
                 }
             }
             .third-text {
