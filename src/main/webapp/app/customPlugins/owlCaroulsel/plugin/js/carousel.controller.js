@@ -584,11 +584,11 @@
 
             function swapEvents(type) {
                 if (type === "on") {
-                    $document.bind(base.ev_types.move, dragMove);
-                    $document.bind(base.ev_types.end, dragEnd);
+                    $document.on(base.ev_types.move, dragMove);
+                    $document.on(base.ev_types.end, dragEnd);
                 } else if (type === "off") {
-                    $document.unbind(base.ev_types.move, dragMove);
-                    $document.unbind(base.ev_types.end, dragEnd);
+                    $document.off(base.ev_types.move, dragMove);
+                    $document.off(base.ev_types.end, dragEnd);
                 }
             }
 
@@ -673,7 +673,7 @@
                 }
 
                 if ((base.newPosY > 10 || base.newPosY < -10) && locals.sliding === false) {
-                    $document.unbind("touchmove");
+                    $document.off("touchmove");
                 }
 
                 minSwipe = function () {
@@ -694,6 +694,7 @@
             function dragEnd(event) {
                 var ev = event.originalEvent || event || window.event,
                     newPosition,
+                    clickPreventCallback,
                     handlers,
                     owlStopEvent;
 
@@ -713,26 +714,36 @@
 
                 if (base.newRelativeX !== 0) {
                     newPosition = getNewPosition();
-                    angular.element(locals.target).bind("click", function (ev) {
+                    goTo(newPosition, false, "drag");
+
+                    //off가 작동하지 않아 preventDefault()가 해제되지 않았다.
+                    //jQuery의 on은 namespace를 사용하여 특정 이벤트를 바로 off시킬 수 있었지만,
+                    //angularjs의 jqlite의 on은 namespace를 지원하지 않기 때문에
+                    //특정 이벤트를 off시키기 위해선 다음과 같이 off의 두번째 매개변수로 on의 콜백함수를 넣어준다.
+                    //http://stackoverflow.com/questions/28308839/angular-dom-event-namespace
+                    clickPreventCallback = function (ev) {
                         ev.stopImmediatePropagation();
                         ev.stopPropagation();
                         ev.preventDefault();
-                        angular.element(locals.target).unbind("click");
-                    });
-                    /*handlers = $._data(ev.target, "events").click;
+                        return angular.element(this).off("click", clickPreventCallback);
+                    };
+
+                    angular.element(locals.target).on("click", clickPreventCallback);
+
+                    /*handlers = jQuery._data(ev.target, "events").click;
                      console.log(handlers)
                      owlStopEvent = handlers.pop();
                      console.log(owlStopEvent)
                      handlers.splice(0, 0, owlStopEvent);
                      console.log(handlers)*/
-                    goTo(newPosition, false, "drag");
+
                 }
                 swapEvents("off");
             }
 
             //base.$elem : 캐러셀 대상 dom
             //드래그 이벤트 시작 dragStart()로 ㄱㄱ
-            angular.element(base.$elem[0].querySelector(".owl-wrapper")).bind(base.ev_types.start, dragStart);
+            angular.element(base.$elem[0].querySelector(".owl-wrapper")).on(base.ev_types.start, dragStart);
         }
 
         function getNewPosition() {
@@ -787,10 +798,10 @@
         }
 
         function disabledEvents() {
-            base.$elem.bind("dragstart", function (event) {
+            base.$elem.on("dragstart", function (event) {
                 event.preventDefault();
             });
-            base.$elem.bind("mousedown", function (e) {
+            base.$elem.on("mousedown", function (e) {
                 if (e.target.tagName === ('INPUT' || 'TEXTAREA' || 'SELECT' || 'OPTION')) {
                     return false
                 }
