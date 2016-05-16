@@ -2,80 +2,14 @@
 .entire-container {
     max-width: 1250px;
     margin: 20px auto;
-    .row {
+    .row.custom {
         margin-left: 0;
         margin-right: 0;
     }
 }
 
-/* 메인 컨테이너*/
-.main-container {
-    border-left: 1px solid #ddd;
-}
-
-/* 사이드 컨테이너*/
-.aside-container.non-mobile {
-    padding-left: 0;
-    padding-right: 0;
-    .side-navbar {
-        margin: 0 0 15px;
-        padding: 8px;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        li {
-            padding: 8px 0;
-            a {
-                padding-right: 10px;
-                display: block;
-                i {
-                    float: right;
-                    line-height: inherit;
-                    margin-right: -10px;
-                }
-            }
-            a.active {
-                color: #e47911;
-            }
-        }
-    }
-    .fixed {
-        position: fixed;
-        top: 20px;
-    }
-    .outFixed {
-        overflow: hidden;
-    }
-    .inFixed {
-        margin: 0 -17px 0 0;
-        overflow-y: scroll;
-    }
-}
-
-.aside-container.mobile {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    .btn-group {
-        margin: 0;
-        .btn {
-            border-radius: 0;
-            font-size: 18px;
-            padding: 5px 0;
-        }
-    }
-}
-
-/*프로필*/
-.profile-wrap {
-    .img-wrap {
-        padding: 0 5% 5%;
-        img {
-            border-radius: 10px;
-        }
-    }
-    .info-wrap {
-        margin: 0 0 0 10px;
-    }
+.canvas-wrap {
+    overflow: auto;
 }
 
 @media only screen and (max-width: 1280px) {
@@ -325,10 +259,22 @@ ul#strength {
 .uib-datepicker-popup > li > div.uib-datepicker > table:focus {
     outline: none;
 }
+
 /* end of ui bootstrap tweaks */
 
 /* Rules for sizing the icon. */
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}

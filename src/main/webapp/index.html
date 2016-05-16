@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko_KR" class="no-js" ng-app="myBlogApp">
+<html lang="ko" class="no-js" ng-app="myBlogApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,6 +93,7 @@
 <script src="app/account/reset/request/reset.request.controller.js"></script>
 <script src="app/account/reset/finish/reset.finish.state.js"></script>
 <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+<script src="app/services/user/user.service.js"></script>
 <script src="app/services/auth/register.service.js"></script>
 <script src="app/services/auth/principal.service.js"></script>
 <script src="app/services/auth/password.service.js"></script>
@@ -104,18 +105,17 @@
 <script src="app/services/auth/auth.jwt.service.js"></script>
 <script src="app/services/auth/activate.service.js"></script>
 <script src="app/services/auth/account.service.js"></script>
-<script src="app/services/user/user.service.js"></script>
 <script src="app/layouts/navbar/navbar.controller.js"></script>
 <script src="app/layouts/navbar/active-link.directive.js"></script>
 <script src="app/layouts/error/error.state.js"></script>
-<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.state.js"></script>
-<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.controller.js"></script>
 <script src="app/entities/contact/contact.state.js"></script>
 <script src="app/entities/contact/contact.service.js"></script>
 <script src="app/entities/contact/contact.controller.js"></script>
 <script src="app/entities/contact/contact-dialog.controller.js"></script>
 <script src="app/entities/contact/contact-detail.controller.js"></script>
 <script src="app/entities/contact/contact-delete-dialog.controller.js"></script>
+<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.state.js"></script>
+<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.controller.js"></script>
 <script src="app/components/util/truncate-words.filter.js"></script>
 <script src="app/components/util/truncate-characters.filter.js"></script>
 <script src="app/components/util/parse-links.service.js"></script>
@@ -144,6 +144,8 @@
 <script src="app/blocks/config/http.config.js"></script>
 <script src="app/blocks/config/compile.config.js"></script>
 <script src="app/blocks/config/alert.config.js"></script>
+<script src="app/algorithm/bubbleSort/bubbleSort.state.js"></script>
+<script src="app/algorithm/bubbleSort/bubbleSort.controller.js"></script>
 <script src="app/admin/user-management/user-management.state.js"></script>
 <script src="app/admin/user-management/user-management.controller.js"></script>
 <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
@@ -183,8 +185,9 @@
 <script src="app/home/home.state.js"></script>
 <script src="app/home/home.controller.js"></script>
 <script src="app/home/home-profile-dialog.controller.js"></script>
-<script src="app/customPlugins/customPlugins.state.js"></script>
 <script src="app/entities/entity.state.js"></script>
+<script src="app/customPlugins/customPlugins.state.js"></script>
+<script src="app/algorithm/algorithm.state.js"></script>
 <script src="app/admin/admin.state.js"></script>
 <script src="app/account/account.state.js"></script>
 <script src="app/app.state.js"></script>

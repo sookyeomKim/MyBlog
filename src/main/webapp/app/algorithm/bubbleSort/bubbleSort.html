@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <section class="col-md-12 well">
+            <h1>버블 정렬</h1>
+            <p>
+                <strong>시간복잡도</strong>
+            </p>
+            <p>
+            <ul>
+                <li><strong>최상 : </strong><span>O(n)</span></li>
+                <li><strong>평균 : </strong><span>O(n^2)</span></li>
+                <li><strong>최하 : </strong><span>O(n^2)</span></li>
+            </ul>
+            </p>
+            <p>
+                <strong>공간복잡도</strong>
+            </p>
+            <p>
+                <span>O(1)</span>
+            </p>
+        </section>
+        <section class="col-md-12 well">
+            <div ng-hide="vm.canvasConfirm">
+                캔버스를 지원하지 않습니다.
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-warning btn-raised" ng-click="vm.sortStart()"
+                        ng-disabled="!vm.canvasConfirm"><span>정렬시작</span>
+                </button>
+            </div>
+            <div class="canvas-wrap">
+                <canvas id="bubble-sort-drawing" width="300" height="100" ng-show="vm.canvasConfirm"></canvas>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Javascript :</strong>
+                </p>
+                <ui-codemirror ui-codemirror-opts="vm.editorJavascriptSource"></ui-codemirror>
+            </div>
+
+            <div>
+                <p>
+                    <strong>Java :</strong>
+                </p>
+                <ui-codemirror ui-codemirror-opts="vm.editorJavaSource"></ui-codemirror>
+            </div>
+        </section>
+    </div>
+</div>

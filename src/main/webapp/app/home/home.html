@@ -1,4 +1,4 @@
-<div class="row" ng-cloak>
+<div class="row custom" ng-cloak>
     <aside class="aside-container non-mobile col-sm-3" ng-if="!vm.isXs">
         <div fix-aside wh-resize prop-name="width" ratio="25" max-width="1250">
             <div class="aside-outer-scroller">
@@ -14,8 +14,14 @@
                                  alt="썸네일 수겸이 프로필사진">
                         </div>
                         <div class="info-wrap">
-                            <p>ikks06luck@naver.com</p>
-
+                            <p>
+                                <a href="https://github.com/sookyumKim" target="_blank">https://github.com</a>
+                            </p>
+                            <p>
+                                <a ngclipboard
+                                   uib-tooltip="클릭시 복사"
+                                   data-clipboard-text="ikks06luck@naver.com">ikks06luck@naver.com</a>
+                            </p>
                             <p>010-3328-8344</p>
                         </div>
 
@@ -44,7 +50,7 @@
             </div>
         </div>
     </aside>
-    <main class="main-container home col-sm-9 col-xs-12">
+    <main class="main-container col-sm-9 col-xs-12">
         <section id="introduce">
             <h1 class="first-text">
                 <p>김수겸</p>
