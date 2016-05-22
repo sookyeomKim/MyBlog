@@ -18,6 +18,12 @@
     }
 }
 
+/*헤더*/
+h1.navbar-brand {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /* start Password strength bar style */
 ul#strength {
     display: inline;
@@ -54,10 +60,6 @@ ul#strength {
 
 #healthCheck .popover {
     margin-left: -50px;
-}
-
-.health-details {
-    min-width: 400px;
 }
 
 .voffset {

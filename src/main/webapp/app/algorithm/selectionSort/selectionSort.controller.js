@@ -7,11 +7,11 @@
 
     angular
         .module('myBlogApp')
-        .controller('BubbleSortController', BubbleSortController);
+        .controller('SelectionSortController', SelectionSortController);
 
-    BubbleSortController.$inject = ['$timeout'];
+    SelectionSortController.$inject = ['$timeout'];
 
-    function BubbleSortController($timeout) {
+    function SelectionSortController($timeout) {
         var vm = this;
         var drawing = document.getElementById("bubble-sort-drawing");
         var context = null;
@@ -27,17 +27,19 @@
             lineWrapping: true,
             lineNumbers: true,
             theme: 'dracula',
-            value: 'function bubbleSort(arry) {\n' +
-            '\tvar tmp=0;\n' +
-            '\tfor (var i = 0; i < arry.length-1; i++) {\n' +
-            '\t\tfor (var j = 0; j < arry.length - 1-i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j+1]) {\n' +
-            '\t\t\t\ttmp = arry[j+1];\n' +
-            '\t\t\t\tarry[j+1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = tmp\n' +
+            value: 'function selectionSort(arry) {\n' +
+            '\tvar criterionIndex = 0;\n' +
+            '\tvar tmp = 0;\n' +
+            '\tfor (var i = 0; i < valueArry.length - 1; i++) {\n' +
+            '\t\tcriterionIndex = i;\n' +
+            '\t\tfor (var j = i + 1; j < valueArry.length; j++) {\n' +
+            '\t\t\tif (valueArry[j] < valueArry[criterionIndex]) {\n' +
+            '\t\t\t\tcriterionIndex = j\n' +
             '\t\t\t}\n' +
             '\t\t}\n' +
-            '\t}\n' +
+            '\ttmp = valueArry[i];\n' +
+            '\tvalueArry[i] = valueArry[criterionIndex];\n' +
+            '\tvalueArry[criterionIndex] = tmp;\n' +
             '}\n'
         };
         vm.editorJavaSource = {
@@ -45,21 +47,23 @@
             lineWrapping: true,
             lineNumbers: true,
             theme: 'dracula',
-            value: 'static void bubbleSort(int[] arry) {\n' +
-            '\tint temp;\n' +
-            '\tfor (int i = 0; i < arry.length - 1; i++) {\n' +
-            '\t\tfor (int j = 0; j < arry.length - 1 - i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j + 1]) {\n' +
-            '\t\t\t\ttemp = arry[j + 1];\n' +
-            '\t\t\t\tarry[j + 1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = temp;\n' +
+            value: 'static void selectionSort(int[] arry) {\n' +
+            '\tint criterionIndex;\n' +
+            '\tint tmp;\n' +
+            '\tfor (int i = 0; i < valueArry.length - 1; i++) {\n' +
+            '\t\tcriterionIndex = i;\n' +
+            '\t\tfor (int j = i + 1; j < valueArry.length; j++) {\n' +
+            '\t\t\tif (valueArry[j] < valueArry[criterionIndex]) {\n' +
+            '\t\t\t\tcriterionIndex = j;\n' +
             '\t\t\t}\n' +
             '\t\t}\n' +
+            '\ttmp = valueArry[i];\n' +
+            '\tvalueArry[i] = valueArry[criterionIndex];\n' +
+            '\tvalueArry[criterionIndex] = tmp;\n' +
             '\t}\n' +
             '}\n'
         };
 
-        //캔버스지원 확인(어차피 blog자체가 ie9이상부터 호환이라 딱히 상관은 없다만...공부를 위해)
         if (drawing.getContext) {
             context = drawing.getContext("2d");
 
@@ -76,20 +80,21 @@
             var tmp = 0;
             var i = 0;
             var j = 0;
+            var criterionIndex = 0;
 
             if (roopCount === 0) {
                 resetArry();
 
-                //for (i = 0; i < arry.length - 1; i++) { //firstLoop
-                //    for (j = 0; j < arry.length - 1 - i; j++) { //secondLoop
-                //        if (arry[j] > arry[j + 1]) {
-                //            tmp = arry[j + 1];
-                //            arry[j + 1] = arry[j];
-                //            reDraw(arry[j], j + 1);
-                //            arry[j] = tmp;
-                //            reDraw(tmp, j);
-                //        }
+                //for (i = 0; i < valueArry.length - 1; i++) {
+                //    criterionIndex = i;
+                //    for (j = i + 1; j < valueArry.length; j++) {
+                //        if (valueArry[j] < valueArry[criterionIndex]) {
+                //            criterionIndex = j
+                //        }                //
                 //    }
+                //    tmp = valueArry[i];
+                //    valueArry[i] = valueArry[criterionIndex];
+                //    valueArry[criterionIndex] = tmp;
                 //}
 
                 //참고
@@ -98,32 +103,30 @@
             }
 
             function firstLoop() {
-                j = 0;
-                secondLoop();
-                function secondLoop() {
-                    timeoutClear = $timeout(function () {
-                        if (vm.valueArry[j] > vm.valueArry[j + 1]) {
-                            tmp = vm.valueArry[j + 1];
-
-                            context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
-                            vm.valueArry[j + 1] = vm.valueArry[j];
-                            reDraw(vm.valueArry[j], j + 1);
-
-                            vm.valueArry[j] = tmp;
-                            reDraw(tmp, j);
+                timeoutClear = $timeout(function () {
+                    criterionIndex = i;
+                    for (j = i + 1; j < vm.valueArry.length; j++) {
+                        if (vm.valueArry[j] < vm.valueArry[criterionIndex]) {
+                            criterionIndex = j
                         }
-                        j++;
-                        roopCount++;
-                        if (j < vm.valueArry.length - 1 - i) {
-                            secondLoop();
-                        } else if (i < vm.valueArry.length - 1) {
-                            i++;
-                            firstLoop();
-                        } else {
-                            initRoopCount();
-                        }
-                    }, vm.roopSpeed);
-                }
+                    }
+                    tmp = vm.valueArry[i];
+
+                    context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
+                    vm.valueArry[i] = vm.valueArry[criterionIndex];
+                    reDraw(vm.valueArry[criterionIndex], i);
+
+                    vm.valueArry[criterionIndex] = tmp;
+                    reDraw(tmp, criterionIndex);
+
+                    roopCount++;
+                    if (i < vm.valueArry.length - 1) {
+                        i++;
+                        firstLoop();
+                    } else {
+                        initRoopCount();
+                    }
+                }, vm.roopSpeed);
             }
 
             function reDraw(value, index) {
@@ -148,15 +151,6 @@
             }
         }
 
-        function resetArry() {
-            vm.valueArry = [10, 8, 9, 1, 4, 3, 6, 2, 7, 5];
-            context.clearRect(0, 0, vm.valueArry.length * 30, 60);
-            for (var i = 0; i < vm.valueArry.length; i++) {
-                context.strokeRect(i * 30, 0, 30, 30);
-                context.fillText(vm.valueArry[i] + "", i * 30 + 15, 15)
-            }
-        }
-
         function roopStop() {
             initRoopCount();
             resetArry()
@@ -167,6 +161,15 @@
                 $timeout.cancel(timeoutClear);
             }
             roopCount = 0;
+        }
+
+        function resetArry() {
+            vm.valueArry = [10, 8, 9, 1, 4, 3, 6, 2, 7, 5];
+            context.clearRect(0, 0, vm.valueArry.length * 30, 60);
+            for (var i = 0; i < vm.valueArry.length; i++) {
+                context.strokeRect(i * 30, 0, 30, 30);
+                context.fillText(vm.valueArry[i] + "", i * 30 + 15, 15)
+            }
         }
     }
 })(window, window.angular);

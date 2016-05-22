@@ -7,11 +7,11 @@
 
     angular
         .module('myBlogApp')
-        .controller('BubbleSortController', BubbleSortController);
+        .controller('InsertionSortController', InsertionSortController);
 
-    BubbleSortController.$inject = ['$timeout'];
+    InsertionSortController.$inject = ['$timeout'];
 
-    function BubbleSortController($timeout) {
+    function InsertionSortController($timeout) {
         var vm = this;
         var drawing = document.getElementById("bubble-sort-drawing");
         var context = null;
@@ -27,16 +27,15 @@
             lineWrapping: true,
             lineNumbers: true,
             theme: 'dracula',
-            value: 'function bubbleSort(arry) {\n' +
-            '\tvar tmp=0;\n' +
-            '\tfor (var i = 0; i < arry.length-1; i++) {\n' +
-            '\t\tfor (var j = 0; j < arry.length - 1-i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j+1]) {\n' +
-            '\t\t\t\ttmp = arry[j+1];\n' +
-            '\t\t\t\tarry[j+1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = tmp\n' +
-            '\t\t\t}\n' +
+            value: 'function insertionSort(arry) {\n' +
+            '\tfor (var i = 1; i < arry.length; i++) {\n' +
+            '\t\tvar temp = arry[i];\n' +
+            '\t\tvar aux = i - 1;\n' +
+            '\t\twhile ((aux >= 0) && (arry[aux] > temp)) {\n' +
+            '\t\t\tarry[aux + 1] = arry[aux];\n' +
+            '\t\t\taux--;\n' +
             '\t\t}\n' +
+            '\t\tarry[aux + 1] = temp;\n' +
             '\t}\n' +
             '}\n'
         };
@@ -45,16 +44,15 @@
             lineWrapping: true,
             lineNumbers: true,
             theme: 'dracula',
-            value: 'static void bubbleSort(int[] arry) {\n' +
-            '\tint temp;\n' +
-            '\tfor (int i = 0; i < arry.length - 1; i++) {\n' +
-            '\t\tfor (int j = 0; j < arry.length - 1 - i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j + 1]) {\n' +
-            '\t\t\t\ttemp = arry[j + 1];\n' +
-            '\t\t\t\tarry[j + 1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = temp;\n' +
-            '\t\t\t}\n' +
+            value: 'static viod insertionSort(int arry[]) {\n' +
+            '\tfor (int i = 1; i < arry.length; i++) {\n' +
+            '\t\tint temp = arry[i];\n' +
+            '\t\tint aux = i - 1;\n' +
+            '\t\twhile ((aux >= 0) && (arry[aux] > temp)) {\n' +
+            '\t\t\tarry[aux + 1] = arry[aux];\n' +
+            '\t\t\taux--;\n' +
             '\t\t}\n' +
+            '\t\tarry[aux + 1] = temp;\n' +
             '\t}\n' +
             '}\n'
         };
@@ -74,22 +72,20 @@
 
         function sortStart() {
             var tmp = 0;
-            var i = 0;
-            var j = 0;
+            var i = 1;
+            var auxIndex = 0;
 
             if (roopCount === 0) {
                 resetArry();
 
-                //for (i = 0; i < arry.length - 1; i++) { //firstLoop
-                //    for (j = 0; j < arry.length - 1 - i; j++) { //secondLoop
-                //        if (arry[j] > arry[j + 1]) {
-                //            tmp = arry[j + 1];
-                //            arry[j + 1] = arry[j];
-                //            reDraw(arry[j], j + 1);
-                //            arry[j] = tmp;
-                //            reDraw(tmp, j);
-                //        }
+                //for (i = 1; i < arry.length; i++) {
+                //    temp = arry[i];
+                //    aux = i - 1;
+                //    while ((aux >= 0) && (arry[aux] > temp)) {
+                //        arry[aux + 1] = arry[aux];
+                //        aux--;
                 //    }
+                //    arry[aux + 1] = temp;
                 //}
 
                 //참고
@@ -98,25 +94,22 @@
             }
 
             function firstLoop() {
-                j = 0;
+                tmp = vm.valueArry[i];
+                auxIndex = i - 1;
                 secondLoop();
                 function secondLoop() {
                     timeoutClear = $timeout(function () {
-                        if (vm.valueArry[j] > vm.valueArry[j + 1]) {
-                            tmp = vm.valueArry[j + 1];
-
-                            context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
-                            vm.valueArry[j + 1] = vm.valueArry[j];
-                            reDraw(vm.valueArry[j], j + 1);
-
-                            vm.valueArry[j] = tmp;
-                            reDraw(tmp, j);
-                        }
-                        j++;
                         roopCount++;
-                        if (j < vm.valueArry.length - 1 - i) {
+                        if ((auxIndex >= 0) && (vm.valueArry[auxIndex] > tmp)) {
+                            context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
+                            vm.valueArry[auxIndex + 1] = vm.valueArry[auxIndex];
+                            reDraw(vm.valueArry[auxIndex], auxIndex + 1);
+                            auxIndex--;
                             secondLoop();
-                        } else if (i < vm.valueArry.length - 1) {
+                        } else if (i < vm.valueArry.length) {
+                            context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
+                            vm.valueArry[auxIndex + 1] = tmp;
+                            reDraw(tmp, auxIndex + 1);
                             i++;
                             firstLoop();
                         } else {
@@ -149,7 +142,7 @@
         }
 
         function resetArry() {
-            vm.valueArry = [10, 8, 9, 1, 4, 3, 6, 2, 7, 5];
+            vm.valueArry = [6, 8, 9, 1, 4, 3, 10, 2, 7, 5];
             context.clearRect(0, 0, vm.valueArry.length * 30, 60);
             for (var i = 0; i < vm.valueArry.length; i++) {
                 context.strokeRect(i * 30, 0, 30, 30);
