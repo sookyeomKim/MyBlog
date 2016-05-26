@@ -16,8 +16,7 @@
             'angular-loading-bar',
             'matchMedia',
             'duScroll',
-            'ngclipboard',
-            'ui.codemirror'
+            'ngclipboard'
         ])
         .run(run);
 

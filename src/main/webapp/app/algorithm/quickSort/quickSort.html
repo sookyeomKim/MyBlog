@@ -1,19 +1,19 @@
 <div class="container">
     <div class="row">
         <section class="col-md-12 well">
-            <h1>선택 정렬</h1>
+            <h1>퀵 정렬</h1>
             <div>
                 <h3>시간복잡도</h3>
                 <ul>
-                    <li><p>최상 : O(n^2)</p></li>
-                    <li><p>평균 : O(n^2)</p></li>
+                    <li><p>최상 : O(n log(n))</p></li>
+                    <li><p>평균 : O(n log(n))</p></li>
                     <li><p>최하 : O(n^2)</p></li>
                 </ul>
             </div>
             <div>
                 <h3>공간복잡도</h3>
                 <p>
-                    O(1)
+                    O(n log(n))
                 </p>
             </div>
         </section>
@@ -48,20 +48,34 @@
                     <strong>Javascript :</strong>
                 </p>
                 <textarea id="editor" rows="4" cols="50" title="editorForm">
-function selectionSort(arry){
-    var tmp = 0;
-    var criterionIndex = 0;
-    for (var i = 0; i < arry.length - 1; i++) {
-        criterionIndex = i;
-        for (var j = i + 1; j < arry.length; j++) {
-            if (arry[j] < arry[criterionIndex]) {
-                criterionIndex = j;
+function Sort(array) {
+    QuickSort(array, 0, array.length - 1);
+}
+function QuickSort(array,start,end) {
+    var i=start;
+    var k=end;
+    if(end > start){
+        var pivot = array[start];
+        while (k>i){
+            while (array[i] <= pivot && i <= end && k > i){
+                i++;
+            }
+            while (array[k] > pivot && k >= start && k >= i){
+                k++;
+            }
+            if(k>i){
+                Swap(array, i, k);
             }
         }
-        tmp = arry[i];
-        arry[i] = arry[criterionIndex];
-        arry[criterionIndex] = tmp;
+        Swap(array, start, k);
+        QuickSort(array, start, k - 1);
+        QuickSort(array, k + 1, end);
     }
+}
+function Swap(arry, left, right) {
+    var temp = arry[left];
+    arry[left] = arry[right];
+    arry[right] = temp;
 }
                 </textarea>
             </div>
@@ -71,20 +85,36 @@ function selectionSort(arry){
                     <strong>Java :</strong>
                 </p>
                 <textarea id="editor2" rows="4" cols="50" title="editorForm">
-static void selectionSort(arry){
-    int tmp;
-    int criterionIndex;
-    for (int i = 0; i < arry.length - 1; i++) {
-        criterionIndex = i;
-        for (int j = i + 1; j < arry.length; j++) {
-            if (arry[j] < arry[criterionIndex]) {
-                criterionIndex = j;
+static void Sort(int[] array) {
+    QuickSort(array, 0, array.length - 1);
+}
+static void QuickSort(int[] array, int start, int end) {
+    int i = start;
+    int k = end;
+    if (end > start) {
+        int pivot = array[start];
+        while (k > i) {
+            while (array[i] <= pivot && i <= end && k > i) {
+                i++;
+            }
+            while (array[k] > pivot && k >= start && k >= i) {
+                k--;
+            }
+            if (k > i) {
+                Swap(array, i, k);
             }
         }
-        tmp = arry[i];
-        arry[i] = arry[criterionIndex];
-        arry[criterionIndex] = tmp;
+        Swap(array, start, k);
+
+        QuickSort(array, start, k - 1);
+        QuickSort(array, k + 1, end);
     }
+}
+
+static void Swap(int[] array, int left, int right) {
+    int temp = array[left];
+    array[left] = array[right];
+    array[right] = temp;
 }
                 </textarea>
             </div>

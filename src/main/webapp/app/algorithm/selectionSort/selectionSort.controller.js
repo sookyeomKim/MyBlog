@@ -9,60 +9,33 @@
         .module('myBlogApp')
         .controller('SelectionSortController', SelectionSortController);
 
-    SelectionSortController.$inject = ['$timeout'];
+    SelectionSortController.$inject = ['$timeout', '$document'];
 
-    function SelectionSortController($timeout) {
+    function SelectionSortController($timeout, $document) {
         var vm = this;
-        var drawing = document.getElementById("bubble-sort-drawing");
+        var drawing = $document[0].getElementById("bubble-sort-drawing");
         var context = null;
         var timeoutClear = null;
-        var roopCount = 0;
+        var roopState = true;
         vm.canvasConfirm = true;
         vm.valueArry = [];
         vm.roopSpeed = 2000;
         vm.sortStart = sortStart;
         vm.roopStop = roopStop;
-        vm.editorJavascriptSource = {
-            mode: {name: "text/javascript"},
-            lineWrapping: true,
+        var textarea = $document[0].getElementById("editor");
+        var textarea2 = $document[0].getElementById("editor2");
+        var editor = CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
-            theme: 'dracula',
-            value: 'function selectionSort(arry) {\n' +
-            '\tvar criterionIndex = 0;\n' +
-            '\tvar tmp = 0;\n' +
-            '\tfor (var i = 0; i < valueArry.length - 1; i++) {\n' +
-            '\t\tcriterionIndex = i;\n' +
-            '\t\tfor (var j = i + 1; j < valueArry.length; j++) {\n' +
-            '\t\t\tif (valueArry[j] < valueArry[criterionIndex]) {\n' +
-            '\t\t\t\tcriterionIndex = j\n' +
-            '\t\t\t}\n' +
-            '\t\t}\n' +
-            '\ttmp = valueArry[i];\n' +
-            '\tvalueArry[i] = valueArry[criterionIndex];\n' +
-            '\tvalueArry[criterionIndex] = tmp;\n' +
-            '}\n'
-        };
-        vm.editorJavaSource = {
-            mode: {name: "text/x-java"},
-            lineWrapping: true,
+            readOnly: true,
+            theme: "dracula",
+            mode: "javascript"
+        });
+        var editor2 = CodeMirror.fromTextArea(textarea2, {
             lineNumbers: true,
-            theme: 'dracula',
-            value: 'static void selectionSort(int[] arry) {\n' +
-            '\tint criterionIndex;\n' +
-            '\tint tmp;\n' +
-            '\tfor (int i = 0; i < valueArry.length - 1; i++) {\n' +
-            '\t\tcriterionIndex = i;\n' +
-            '\t\tfor (int j = i + 1; j < valueArry.length; j++) {\n' +
-            '\t\t\tif (valueArry[j] < valueArry[criterionIndex]) {\n' +
-            '\t\t\t\tcriterionIndex = j;\n' +
-            '\t\t\t}\n' +
-            '\t\t}\n' +
-            '\ttmp = valueArry[i];\n' +
-            '\tvalueArry[i] = valueArry[criterionIndex];\n' +
-            '\tvalueArry[criterionIndex] = tmp;\n' +
-            '\t}\n' +
-            '}\n'
-        };
+            readOnly: true,
+            theme: "dracula",
+            mode: "text/x-java"
+        });
 
         if (drawing.getContext) {
             context = drawing.getContext("2d");
@@ -82,7 +55,8 @@
             var j = 0;
             var criterionIndex = 0;
 
-            if (roopCount === 0) {
+            if (roopState === true) {
+                roopState = false;
                 resetArry();
 
                 //for (i = 0; i < valueArry.length - 1; i++) {
@@ -119,14 +93,14 @@
                     vm.valueArry[criterionIndex] = tmp;
                     reDraw(tmp, criterionIndex);
 
-                    roopCount++;
                     if (i < vm.valueArry.length - 1) {
                         i++;
                         firstLoop();
                     } else {
-                        initRoopCount();
+                        $timeout.cancel(timeoutClear);
+                        roopState = true;
                     }
-                }, vm.roopSpeed);
+                }, vm.roopSpeed, false);
             }
 
             function reDraw(value, index) {
@@ -152,15 +126,9 @@
         }
 
         function roopStop() {
-            initRoopCount();
+            $timeout.cancel(timeoutClear);
+            roopState = true;
             resetArry()
-        }
-
-        function initRoopCount() {
-            for (var k = 0; k < roopCount; k++) {
-                $timeout.cancel(timeoutClear);
-            }
-            roopCount = 0;
         }
 
         function resetArry() {

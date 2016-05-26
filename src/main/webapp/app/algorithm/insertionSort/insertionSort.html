@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group algorithm">
-                        <label class="control-label" for="roopSpeed">루프 속도(MS)</label>
+                        <label class="control-label" for="roopSpeed">정렬 속도(MS)</label>
                         <input type="number" id="roopSpeed" class="form-control" ng-model="vm.roopSpeed">
                     </div>
                 </div>
@@ -48,14 +48,42 @@
                 <p>
                     <strong>Javascript :</strong>
                 </p>
-                <ui-codemirror ui-codemirror-opts="vm.editorJavascriptSource"></ui-codemirror>
+                <textarea id="editor" rows="4" cols="50" title="editorForm">
+function insertionSort(arry){
+    var tmp = 0;
+    var aux = 0;
+    for (var i = 0; i < arry.length - 1; i++) {
+        tmp = arry[i];
+        aux = i - 1;
+        while ((aux >= 0) && (arry[aux] > tmp)) {
+            arry[aux + 1] = arry[aux];
+            aux--;
+        }
+        arry[aux + 1] = tmp;
+    }
+}
+                </textarea>
             </div>
 
             <div>
                 <p>
                     <strong>Java :</strong>
                 </p>
-                <ui-codemirror ui-codemirror-opts="vm.editorJavaSource"></ui-codemirror>
+                <textarea id="editor2" rows="4" cols="50" title="editorForm">
+static void insertionSort(arry){
+    int tmp;
+    int aux;
+    for (int i = 0; i < arry.length - 1; i++) {
+        tmp = arry[i];
+        aux = i - 1;
+        while ((aux >= 0) && (arry[aux] > tmp)) {
+            arry[aux + 1] = arry[aux];
+            aux--;
+        }
+        arry[aux + 1] = tmp;
+    }
+}
+                </textarea>
             </div>
         </section>
     </div>

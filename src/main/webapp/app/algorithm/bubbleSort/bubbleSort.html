@@ -47,14 +47,40 @@
                 <p>
                     <strong>Javascript :</strong>
                 </p>
-                <ui-codemirror ui-codemirror-opts="vm.editorJavascriptSource"></ui-codemirror>
+                <textarea id="editor" rows="4" cols="50" title="editorForm">
+function bubbleSort(arry){
+    var tmp = 0;
+    for (var i = 0; i < arry.length - 1; i++) {
+        for (var j = 0; j < arry.length - 1 - i; j++) {
+            if (arry[j] > arry[j + 1]) {
+                tmp = arry[j + 1];
+                arry[j + 1] = arry[j];
+                arry[j] = tmp;
+            }
+        }
+    }
+}
+                </textarea>
             </div>
 
             <div>
                 <p>
                     <strong>Java :</strong>
                 </p>
-                <ui-codemirror ui-codemirror-opts="vm.editorJavaSource"></ui-codemirror>
+                <textarea id="editor2" rows="4" cols="50" title="editorForm">
+static void bubbleSort(arry){
+    int tmp;
+    for (int i = 0; i < arry.length - 1; i++) {
+        for (int j = 0; j < arry.length - 1 - i; j++) {
+            if (arry[j] > arry[j + 1]) {
+                tmp = arry[j + 1];
+                arry[j + 1] = arry[j];
+                arry[j] = tmp;
+            }
+        }
+    }
+}
+                </textarea>
             </div>
         </section>
     </div>

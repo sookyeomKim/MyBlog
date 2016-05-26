@@ -9,55 +9,34 @@
         .module('myBlogApp')
         .controller('BubbleSortController', BubbleSortController);
 
-    BubbleSortController.$inject = ['$timeout'];
+    BubbleSortController.$inject = ['$timeout', '$document'];
 
-    function BubbleSortController($timeout) {
+    function BubbleSortController($timeout, $document) {
         var vm = this;
-        var drawing = document.getElementById("bubble-sort-drawing");
+        var drawing = $document[0].getElementById("bubble-sort-drawing");
         var context = null;
         var timeoutClear = null;
-        var roopCount = 0;
+        var roopState = true;
+        var textarea = $document[0].getElementById("editor");
+        var textarea2 = $document[0].getElementById("editor2");
+        var editor = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            readOnly: true,
+            theme: "dracula",
+            mode: "javascript"
+        });
+        var editor2 = CodeMirror.fromTextArea(textarea2, {
+            lineNumbers: true,
+            readOnly: true,
+            theme: "dracula",
+            mode: "text/x-java"
+        });
         vm.canvasConfirm = true;
         vm.valueArry = [];
         vm.roopSpeed = 2000;
         vm.sortStart = sortStart;
         vm.roopStop = roopStop;
-        vm.editorJavascriptSource = {
-            mode: {name: "text/javascript"},
-            lineWrapping: true,
-            lineNumbers: true,
-            theme: 'dracula',
-            value: 'function bubbleSort(arry) {\n' +
-            '\tvar tmp=0;\n' +
-            '\tfor (var i = 0; i < arry.length-1; i++) {\n' +
-            '\t\tfor (var j = 0; j < arry.length - 1-i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j+1]) {\n' +
-            '\t\t\t\ttmp = arry[j+1];\n' +
-            '\t\t\t\tarry[j+1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = tmp\n' +
-            '\t\t\t}\n' +
-            '\t\t}\n' +
-            '\t}\n' +
-            '}\n'
-        };
-        vm.editorJavaSource = {
-            mode: {name: "text/x-java"},
-            lineWrapping: true,
-            lineNumbers: true,
-            theme: 'dracula',
-            value: 'static void bubbleSort(int[] arry) {\n' +
-            '\tint temp;\n' +
-            '\tfor (int i = 0; i < arry.length - 1; i++) {\n' +
-            '\t\tfor (int j = 0; j < arry.length - 1 - i; j++) {\n' +
-            '\t\t\tif (arry[j] > arry[j + 1]) {\n' +
-            '\t\t\t\ttemp = arry[j + 1];\n' +
-            '\t\t\t\tarry[j + 1] = arry[j];\n' +
-            '\t\t\t\tarry[j] = temp;\n' +
-            '\t\t\t}\n' +
-            '\t\t}\n' +
-            '\t}\n' +
-            '}\n'
-        };
+
 
         //캔버스지원 확인(어차피 blog자체가 ie9이상부터 호환이라 딱히 상관은 없다만...공부를 위해)
         if (drawing.getContext) {
@@ -77,20 +56,9 @@
             var i = 0;
             var j = 0;
 
-            if (roopCount === 0) {
+            if (roopState === true) {
+                roopState = false;
                 resetArry();
-
-                //for (i = 0; i < arry.length - 1; i++) { //firstLoop
-                //    for (j = 0; j < arry.length - 1 - i; j++) { //secondLoop
-                //        if (arry[j] > arry[j + 1]) {
-                //            tmp = arry[j + 1];
-                //            arry[j + 1] = arry[j];
-                //            reDraw(arry[j], j + 1);
-                //            arry[j] = tmp;
-                //            reDraw(tmp, j);
-                //        }
-                //    }
-                //}
 
                 //참고
                 //http://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop#_=_
@@ -113,16 +81,16 @@
                             reDraw(tmp, j);
                         }
                         j++;
-                        roopCount++;
                         if (j < vm.valueArry.length - 1 - i) {
                             secondLoop();
                         } else if (i < vm.valueArry.length - 1) {
                             i++;
                             firstLoop();
                         } else {
-                            initRoopCount();
+                            $timeout.cancel(timeoutClear);
+                            roopState = true;
                         }
-                    }, vm.roopSpeed);
+                    }, vm.roopSpeed, false);
                 }
             }
 
@@ -158,15 +126,9 @@
         }
 
         function roopStop() {
-            initRoopCount();
+            $timeout.cancel(timeoutClear);
+            roopState = true;
             resetArry()
-        }
-
-        function initRoopCount() {
-            for (var k = 0; k < roopCount; k++) {
-                $timeout.cancel(timeoutClear);
-            }
-            roopCount = 0;
         }
     }
 })(window, window.angular);

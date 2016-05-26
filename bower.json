@@ -29,7 +29,7 @@
     "bootstrap-material-design-icons": "^2.2.0",
     "clipboard": "^1.5.10",
     "ngclipboard": "^1.1.1",
-    "angular-ui-codemirror": "^0.3.0"
+    "codemirror": "^5.15.2"
   },
   "devDependencies": {
     "angular-mocks": "1.5.2"
@@ -59,6 +59,14 @@
     },
     "bootstrap-material-design-icons": {
       "main": "scss/material-icons.scss"
+    },
+    "codemirror": {
+      "main": [
+        "lib/codemirror.js",
+        "lib/codemirror.css",
+        "mode/javascript/javascript.js",
+        "mode/clike/clike.js"
+      ]
     }
   },
   "resolutions": {

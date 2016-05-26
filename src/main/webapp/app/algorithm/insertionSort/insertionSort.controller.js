@@ -9,53 +9,33 @@
         .module('myBlogApp')
         .controller('InsertionSortController', InsertionSortController);
 
-    InsertionSortController.$inject = ['$timeout'];
+    InsertionSortController.$inject = ['$timeout', '$document'];
 
-    function InsertionSortController($timeout) {
+    function InsertionSortController($timeout, $document) {
         var vm = this;
-        var drawing = document.getElementById("bubble-sort-drawing");
+        var drawing = $document[0].getElementById("bubble-sort-drawing");
         var context = null;
         var timeoutClear = null;
-        var roopCount = 0;
+        var roopState = true;
+        var textarea = $document[0].getElementById("editor");
+        var textarea2 = $document[0].getElementById("editor2");
+        var editor = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            readOnly: true,
+            theme: "dracula",
+            mode: "javascript"
+        });
+        var editor2 = CodeMirror.fromTextArea(textarea2, {
+            lineNumbers: true,
+            readOnly: true,
+            theme: "dracula",
+            mode: "text/x-java"
+        });
         vm.canvasConfirm = true;
         vm.valueArry = [];
         vm.roopSpeed = 2000;
         vm.sortStart = sortStart;
         vm.roopStop = roopStop;
-        vm.editorJavascriptSource = {
-            mode: {name: "text/javascript"},
-            lineWrapping: true,
-            lineNumbers: true,
-            theme: 'dracula',
-            value: 'function insertionSort(arry) {\n' +
-            '\tfor (var i = 1; i < arry.length; i++) {\n' +
-            '\t\tvar temp = arry[i];\n' +
-            '\t\tvar aux = i - 1;\n' +
-            '\t\twhile ((aux >= 0) && (arry[aux] > temp)) {\n' +
-            '\t\t\tarry[aux + 1] = arry[aux];\n' +
-            '\t\t\taux--;\n' +
-            '\t\t}\n' +
-            '\t\tarry[aux + 1] = temp;\n' +
-            '\t}\n' +
-            '}\n'
-        };
-        vm.editorJavaSource = {
-            mode: {name: "text/x-java"},
-            lineWrapping: true,
-            lineNumbers: true,
-            theme: 'dracula',
-            value: 'static viod insertionSort(int arry[]) {\n' +
-            '\tfor (int i = 1; i < arry.length; i++) {\n' +
-            '\t\tint temp = arry[i];\n' +
-            '\t\tint aux = i - 1;\n' +
-            '\t\twhile ((aux >= 0) && (arry[aux] > temp)) {\n' +
-            '\t\t\tarry[aux + 1] = arry[aux];\n' +
-            '\t\t\taux--;\n' +
-            '\t\t}\n' +
-            '\t\tarry[aux + 1] = temp;\n' +
-            '\t}\n' +
-            '}\n'
-        };
 
         //캔버스지원 확인(어차피 blog자체가 ie9이상부터 호환이라 딱히 상관은 없다만...공부를 위해)
         if (drawing.getContext) {
@@ -75,7 +55,8 @@
             var i = 1;
             var auxIndex = 0;
 
-            if (roopCount === 0) {
+            if (roopState === true) {
+                roopState = false;
                 resetArry();
 
                 //for (i = 1; i < arry.length; i++) {
@@ -99,7 +80,6 @@
                 secondLoop();
                 function secondLoop() {
                     timeoutClear = $timeout(function () {
-                        roopCount++;
                         if ((auxIndex >= 0) && (vm.valueArry[auxIndex] > tmp)) {
                             context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
                             vm.valueArry[auxIndex + 1] = vm.valueArry[auxIndex];
@@ -113,9 +93,10 @@
                             i++;
                             firstLoop();
                         } else {
-                            initRoopCount();
+                            $timeout.cancel(timeoutClear);
+                            roopState = true;
                         }
-                    }, vm.roopSpeed);
+                    }, vm.roopSpeed, false);
                 }
             }
 
@@ -151,15 +132,9 @@
         }
 
         function roopStop() {
-            initRoopCount();
+            $timeout.cancel(timeoutClear);
+            roopState = true;
             resetArry()
-        }
-
-        function initRoopCount() {
-            for (var k = 0; k < roopCount; k++) {
-                $timeout.cancel(timeoutClear);
-            }
-            roopCount = 0;
         }
     }
 })(window, window.angular);
