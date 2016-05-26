@@ -54,6 +54,7 @@
             var traceLoopCount = 0;
 
             function init() {
+                roopState = false;
                 $timeout.cancel(timeoutClear);
                 loopSequenceArray = [];
                 traceLoopCount = 0;
@@ -162,7 +163,6 @@
 
         function sortStart() {
             if (roopState === true) {
-                roopState = false;
                 resetArry();
                 Sort.start(vm.valueArry);
             }

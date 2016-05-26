@@ -62,8 +62,9 @@
     },
     "codemirror": {
       "main": [
-        "lib/codemirror.js",
         "lib/codemirror.css",
+        "theme/dracula.css",
+        "lib/codemirror.js",
         "mode/javascript/javascript.js",
         "mode/clike/clike.js"
       ]
