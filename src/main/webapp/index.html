@@ -26,7 +26,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
-    <link rel="stylesheet" href="bower_components/codemirror/theme/dracula.css">
+    <link rel="stylesheet" href="bower_components/codemirror/theme/dracula.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
@@ -135,6 +135,9 @@
 <script src="app/components/util/data-util.service.js"></script>
 <script src="app/components/util/capitalize.filter.js"></script>
 <script src="app/components/util/base64.service.js"></script>
+<script src="app/components/alert/alert.service.js"></script>
+<script src="app/components/alert/alert.directive.js"></script>
+<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/components/login/login.service.js"></script>
 <script src="app/components/login/login.controller.js"></script>
 <script src="app/components/form/uib-pagination.config.js"></script>
@@ -143,9 +146,6 @@
 <script src="app/components/form/pagination.constants.js"></script>
 <script src="app/components/form/minbytes.directive.js"></script>
 <script src="app/components/form/maxbytes.directive.js"></script>
-<script src="app/components/alert/alert.service.js"></script>
-<script src="app/components/alert/alert.directive.js"></script>
-<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/blocks/interceptor/notification.interceptor.js"></script>
 <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
 <script src="app/blocks/interceptor/auth.interceptor.js"></script>
@@ -171,10 +171,10 @@
 <script src="app/admin/health/health.service.js"></script>
 <script src="app/admin/health/health.modal.controller.js"></script>
 <script src="app/admin/health/health.controller.js"></script>
+<script src="app/admin/docs/docs.state.js"></script>
 <script src="app/admin/configuration/configuration.state.js"></script>
 <script src="app/admin/configuration/configuration.service.js"></script>
 <script src="app/admin/configuration/configuration.controller.js"></script>
-<script src="app/admin/docs/docs.state.js"></script>
 <script src="app/admin/audits/audits.state.js"></script>
 <script src="app/admin/audits/audits.service.js"></script>
 <script src="app/admin/audits/audits.controller.js"></script>
@@ -182,10 +182,10 @@
 <script src="app/algorithm/selectionSort/selectionSort.controller.js"></script>
 <script src="app/algorithm/quickSort/quickSort.state.js"></script>
 <script src="app/algorithm/quickSort/quickSort.controller.js"></script>
-<script src="app/algorithm/insertionSort/insertionSort.state.js"></script>
-<script src="app/algorithm/insertionSort/insertionSort.controller.js"></script>
 <script src="app/algorithm/bubbleSort/bubbleSort.state.js"></script>
 <script src="app/algorithm/bubbleSort/bubbleSort.controller.js"></script>
+<script src="app/algorithm/insertionSort/insertionSort.state.js"></script>
+<script src="app/algorithm/insertionSort/insertionSort.controller.js"></script>
 <script src="app/account/social/social.state.js"></script>
 <script src="app/account/social/social.service.js"></script>
 <script src="app/account/social/social-register.controller.js"></script>
@@ -202,8 +202,8 @@
 <script src="app/home/home.state.js"></script>
 <script src="app/home/home.controller.js"></script>
 <script src="app/home/home-profile-dialog.controller.js"></script>
-<script src="app/entities/entity.state.js"></script>
 <script src="app/customPlugins/customPlugins.state.js"></script>
+<script src="app/entities/entity.state.js"></script>
 <script src="app/admin/admin.state.js"></script>
 <script src="app/algorithm/algorithm.state.js"></script>
 <script src="app/account/account.state.js"></script>

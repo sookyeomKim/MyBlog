@@ -144,7 +144,7 @@ gulp.task('assets:prod', ['images', 'styles', 'html'], build);
 gulp.task('html', function () {
     return gulp.src(config.app + 'app/**/*.html')
         //TODO 다른 미니파이어로 변경하여 이그노어 설정
-        /*.pipe(htmlmin({collapseWhitespace: true}))*/
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(templateCache({
             module: 'myBlogApp',
             root: 'app/',
