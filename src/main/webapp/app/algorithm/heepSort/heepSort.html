@@ -1,13 +1,13 @@
 <main class="container" role="main">
     <div class="row">
         <section class="col-md-12 well">
-            <h1>퀵 정렬</h1>
+            <h1>힙 정렬</h1>
             <div>
                 <h3>시간복잡도</h3>
                 <ul>
                     <li><p>최상 : O(n log(n))</p></li>
                     <li><p>평균 : O(n log(n))</p></li>
-                    <li><p>최하 : O(n^2)</p></li>
+                    <li><p>최하 : O(n log(n))</p></li>
                 </ul>
             </div>
             <div>
@@ -49,34 +49,54 @@
                 </p>
                 <!-- htmlmin:ignore -->
                 <textarea id="editor" rows="4" cols="50" title="editorForm">
-function Sort(array) {
-    QuickSort(array, 0, array.length - 1);
-}
-function QuickSort(array,start,end) {
-    var i=start;
-    var k=end;
-    if(end > start){
-        var pivot = array[start];
-        while (k>i){
-            while (array[i] <= pivot && i <= end && k > i){
-                i++;
-            }
-            while (array[k] > pivot && k >= start && k >= i){
-                k++;
-            }
-            if(k>i){
-                Swap(array, i, k);
-            }
-        }
-        Swap(array, start, k);
-        QuickSort(array, start, k - 1);
-        QuickSort(array, k + 1, end);
+function sort(array) {
+    var heepArray = [];
+
+    array.forEach(function (value) {
+        upHeep(heepArray, value);
+    });
+
+    for (var i = array.length - 1; i >= 0; i--) {
+        array[i] = downHeep(heepArray);
     }
 }
-function Swap(arry, left, right) {
-    var temp = arry[left];
-    arry[left] = arry[right];
-    arry[right] = temp;
+
+function upHeep(heepArray, key) {
+    heapSize = heapSize + 1;
+    var i = heapSize;
+    heepArray[i] = key;
+    while (i !== 0 && heepArray[i] > heepArray[Math.floor((i - 1) / 2)]) {
+        Swap(heepArray, i, Math.floor((i - 1) / 2));
+        i = Math.floor((i - 1) / 2);
+    }
+}
+
+function downHeep(heepArray) {
+    var largest;
+    var item = heepArray[0];
+    heepArray[0] = heepArray[heapSize];
+    heapSize = heapSize - 1;
+    var i = 0;
+    while ((i * 2 + 1) <= heapSize) {
+        if ((i * 2 + 2) > heapSize || heepArray[i * 2 + 1] > heepArray[i * 2 + 2]) {
+            largest = i * 2 + 1;
+        } else {
+            largest = i * 2 + 2;
+        }
+        if (heepArray[i] > heepArray[largest]) {
+            break;
+        }
+        Swap(heepArray, i, largest);
+        i = largest;
+    }
+    return item;
+}
+
+
+function Swap(array, left, right) {
+    var tmp = array[left];
+    array[left] = array[right];
+    array[right] = tmp;
 }
                 </textarea>
                 <!-- htmlmin:ignore -->
@@ -88,36 +108,57 @@ function Swap(arry, left, right) {
                 </p>
                 <!-- htmlmin:ignore -->
                 <textarea id="editor2" rows="4" cols="50" title="editorForm">
-static void Sort(int[] array) {
-    QuickSort(array, 0, array.length - 1);
-}
-static void QuickSort(int[] array, int start, int end) {
-    int i = start;
-    int k = end;
-    if (end > start) {
-        int pivot = array[start];
-        while (k > i) {
-            while (array[i] <= pivot && i <= end && k > i) {
-                i++;
-            }
-            while (array[k] > pivot && k >= start && k >= i) {
-                k--;
-            }
-            if (k > i) {
-                Swap(array, i, k);
-            }
-        }
-        Swap(array, start, k);
+static int heapSize = -1;
 
-        QuickSort(array, start, k - 1);
-        QuickSort(array, k + 1, end);
+static void Sort(int[] array) {
+    int[] heepArray = new int[array.length];
+
+    for (int key : array) {
+        upHeep(heepArray, key);
+    }
+
+    for (int i = array.length - 1; i >= 0; i--) {
+        array[i] = downHeep(heepArray);
     }
 }
 
-static void Swap(int[] array, int left, int right) {
-    int temp = array[left];
-    array[left] = array[right];
-    array[right] = temp;
+static void upHeep(int[] heepArray, int key) {
+    heapSize = heapSize + 1;
+    int i = heapSize;
+    heepArray[i] = key;
+
+    while (i != 0 && heepArray[i] > heepArray[(i - 1) / 2]) {
+        Swap(heepArray, i, (i - 1) / 2);
+        i = (i - 1) / 2;
+    }
+}
+
+static int downHeep(int[] heepArray) {
+    int largest;
+    int item = heepArray[0];
+    heepArray[0] = heepArray[heapSize];
+    heapSize = heapSize - 1;
+    int i = 0;
+    while ((i * 2 + 1) <= heapSize) {
+        if ((i * 2 + 2) > heapSize || heepArray[i * 2 + 1] > heepArray[i * 2 + 2]) {
+            largest = i * 2 + 1;
+        } else {
+            largest = i * 2 + 2;
+        }
+        if (heepArray[i] > heepArray[largest]) {
+            break;
+        }
+        Swap(heepArray, i, largest);
+        i = largest;
+    }
+    return item;
+}
+
+static void Swap(int[] heepArray, int left, int right) {
+    int temp;
+    temp = heepArray[left];
+    heepArray[left] = heepArray[right];
+    heepArray[right] = temp;
 }
                 </textarea>
                 <!-- htmlmin:ignore -->

@@ -7,7 +7,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!--<h1 class="navbar-brand">KSKBLOG</h1>-->
             <h1 class="navbar-brand">
                 <a  href="#/" ng-click="vm.collapseNavbar()">
                     KSKBLOG
@@ -29,7 +28,7 @@
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
                 <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_ADMIN"
                     uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+                    <a class="dropdown-toggle" uib-dropdown-toggle id="entity-menu" role="button">
                         <span>
                             <span>
                                 Entities
@@ -47,7 +46,7 @@
                     </ul>
                 </li>
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
+                    <a class="dropdown-toggle" uib-dropdown-toggle id="account-menu" role="button">
                         <span>
                             <span>
                                 Account
@@ -85,7 +84,7 @@
                 </li>
                 <li ng-class="{active: vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN"
                     uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
+                    <a class="dropdown-toggle" uib-dropdown-toggle  id="admin-menu" role="button">
                         <span>
                             <span>Administration</span>
                             <b class="caret"></b>
