@@ -9,4 +9,5 @@
 * jQuery
 * AngularJS
 * gulp
-> 스타터킷 - [Jhipster](http://jhipster.github.io/)
+
+ 스타터킷 - [Jhipster](http://jhipster.github.io/)
