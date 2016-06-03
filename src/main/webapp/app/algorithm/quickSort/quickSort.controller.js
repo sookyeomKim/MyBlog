@@ -9,9 +9,9 @@
         .module('myBlogApp')
         .controller('QuickSortController', QuickSortController);
 
-    QuickSortController.$inject = ['$timeout', '$document'];
+    QuickSortController.$inject = ['$timeout', '$document', '$scope'];
 
-    function QuickSortController($timeout, $document) {
+    function QuickSortController($timeout, $document, $scope) {
         var vm = this;
         var drawing = $document[0].getElementById("bubble-sort-drawing");
         var context = null;
@@ -123,6 +123,10 @@
                 }, vm.roopSpeed, false)
             }
 
+            function cleanTimeout() {
+                $timeout.cancel(timeoutClear);
+            }
+
             function QuickSort(array, start, end) {
                 var i = start;// 왼쪽에서 시작하여 오른쪽으로 피봇보다값이 큰 값을 찾기 위한 인덱스입니다.
                 var k = end;// 오른쪽에서 시작하여 왼쪽으로 피봇보다값이 작은 값을 찾기 위한 인덱스입니다.
@@ -156,6 +160,7 @@
             }
 
             return {
+                cleanTimeout: cleanTimeout,
                 start: sort,
                 init: init
             }
@@ -186,5 +191,10 @@
             Sort.init();
             roopState = true;
         }
+
+        $scope.$on('$destroy', function () {
+            Sort.cleanTimeout();
+            Sort = null;
+        });
     }
 })(window, window.angular);

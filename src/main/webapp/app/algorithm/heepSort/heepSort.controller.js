@@ -9,9 +9,9 @@
         .module('myBlogApp')
         .controller('HeepSortController', HeepSortController);
 
-    HeepSortController.$inject = ['$timeout', '$document'];
+    HeepSortController.$inject = ['$timeout', '$document', '$scope'];
 
-    function HeepSortController($timeout, $document) {
+    function HeepSortController($timeout, $document, $scope) {
         var vm = this;
         var drawing = $document[0].getElementById("bubble-sort-drawing");
         var context = null;
@@ -118,12 +118,16 @@
                 }, vm.roopSpeed, false)
             }
 
+            function cleanTimeout() {
+                $timeout.cancel(timeoutClear);
+            }
+
             function Swap(array, left, right) {
                 var tmp = array[left];
                 array[left] = array[right];
                 array[right] = tmp;
             }
-            
+
             function upHeep(heepArray, key) {
                 //슈도코드
                 //insert_max_heap(A, key)
@@ -202,6 +206,7 @@
             }
 
             return {
+                cleanTimeout: cleanTimeout,
                 start: sort,
                 init: init
             }
@@ -232,5 +237,10 @@
             Sort.init();
             roopState = true;
         }
+
+        $scope.$on('$destroy', function () {
+            Sort.cleanTimeout();
+            Sort = null;
+        });
     }
 })(window, window.angular);
