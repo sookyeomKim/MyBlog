@@ -9,13 +9,10 @@
         .module('myBlogApp')
         .controller('HeepSortController', HeepSortController);
 
-    HeepSortController.$inject = ['$timeout', '$document', '$scope'];
+    HeepSortController.$inject = ['$timeout', '$document', '$scope', 'Tracer'];
 
-    function HeepSortController($timeout, $document, $scope) {
+    function HeepSortController($timeout, $document, $scope, Tracer) {
         var vm = this;
-        var drawing = $document[0].getElementById("bubble-sort-drawing");
-        var context = null;
-        var roopState = true;
         var Sort = null;
         var textarea = $document[0].getElementById("editor");
         var textarea2 = $document[0].getElementById("editor2");
@@ -31,96 +28,14 @@
             theme: "dracula",
             mode: "text/x-java"
         });
-        vm.canvasConfirm = true;
+        vm.canvasConfirm = Tracer.init('bubble-sort-drawing');
         vm.valueArry = [];
-        vm.roopSpeed = 2000;
         vm.sortStart = sortStart;
-        vm.roopStop = roopStop;
+        vm.sortStop = sortStop;
+        vm.roopSpeed = 2000;
 
-        if (drawing.getContext) {
-            context = drawing.getContext("2d");
-            context.strokeStyle = "#e47911";
-            context.font = "blod 14px Arial";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-            resetArry();
-        } else {
-            vm.canvasConfirm = false;
-        }
-
-        Sort = (function (context) {
-            var loopSequenceArray = [];
-            var timeoutClear = null;
-            var traceLoopCount = 0;
+        Sort = (function () {
             var heapSize = -1;
-
-            function init() {
-                roopState = false;
-                $timeout.cancel(timeoutClear);
-                loopSequenceArray = [];
-                traceLoopCount = 0;
-            }
-
-            function reDraw(value, index) {
-                canvas_arrow(context, index * 30 + 15, 60, index * 30 + 15, 30);
-                context.clearRect(index * 30, 0, 30, 30);
-                context.strokeRect(index * 30, 0, 30, 30);
-                context.fillText(value + "", index * 30 + 15, 15);
-            }
-
-            //참고
-            //http://stackoverflow.com/questions/808826/draw-arrow-on-canvas-tag
-            function canvas_arrow(context, fromx, fromy, tox, toy) {
-                var headLen = 10;   // length of head in pixels
-                var angle = Math.atan2(toy - fromy, tox - fromx);
-                context.beginPath();
-                context.moveTo(fromx, fromy);
-                context.lineTo(tox, toy);
-                context.lineTo(tox - headLen * Math.cos(angle - Math.PI / 6), toy - headLen * Math.sin(angle - Math.PI / 6));
-                context.moveTo(tox, toy);
-                context.lineTo(tox - headLen * Math.cos(angle + Math.PI / 6), toy - headLen * Math.sin(angle + Math.PI / 6));
-                context.stroke();
-            }
-
-            function tracer(leftIndex, leftValue, rightIndex, rightValue) {
-                if (rightIndex) {
-                    loopSequenceArray.push({
-                        leftIndex: leftIndex,
-                        leftValue: leftValue,
-                        rightIndex: rightIndex,
-                        rightValue: rightValue
-                    })
-                } else {
-                    loopSequenceArray.push({
-                        leftIndex: leftIndex,
-                        leftValue: leftValue,
-                        rightIndex: null,
-                        rightValue: null
-                    })
-                }
-            }
-
-            function traceOn() {
-                if (loopSequenceArray[traceLoopCount].rightIndex !== null) {
-                    context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
-                    reDraw(loopSequenceArray[traceLoopCount].leftValue, loopSequenceArray[traceLoopCount].leftIndex);
-                    reDraw(loopSequenceArray[traceLoopCount].rightValue, loopSequenceArray[traceLoopCount].rightIndex);
-                } else {
-                    context.clearRect(0, 30, 30 * vm.valueArry.length, 60);
-                    reDraw(loopSequenceArray[traceLoopCount].leftValue, loopSequenceArray[traceLoopCount].leftIndex);
-                }
-
-                timeoutClear = $timeout(function () {
-                    traceLoopCount++;
-                    if (loopSequenceArray.length > traceLoopCount) {
-                        traceOn()
-                    }
-                }, vm.roopSpeed, false)
-            }
-
-            function cleanTimeout() {
-                $timeout.cancel(timeoutClear);
-            }
 
             function Swap(array, left, right) {
                 var tmp = array[left];
@@ -146,7 +61,7 @@
                 heepArray[i] = key;//heep배열의 마지막 위치에 새로운 요소 삽입
                 while (i !== 0 && heepArray[i] > heepArray[Math.floor((i - 1) / 2)]) {//삽입된 요소가 루트노드가 아니고 삽입된 요소의 부모노드보다 삽입된 요소가 더 클 경우 반복
                     Swap(heepArray, i, Math.floor((i - 1) / 2));//부모노드와 위치 변경
-                    tracer(i, heepArray[i], Math.floor((i - 1) / 2), heepArray[Math.floor((i - 1) / 2)]);
+                    Tracer.tracer(i, heepArray[i], Math.floor((i - 1) / 2), heepArray[Math.floor((i - 1) / 2)]);
                     i = Math.floor((i - 1) / 2);//변경된 위치를 기준점으로 재설정
                 }
             }
@@ -182,14 +97,13 @@
                         break;
                     }
                     Swap(heepArray, i, largest);
-                    tracer(i, heepArray[i], largest, heepArray[largest]);
+                    Tracer.tracer(i, heepArray[i], largest, heepArray[largest]);
                     i = largest;//자리를 바꾼 자식노드의 위치를 기준 위치로 재설정
                 }
-                /*console.log(item);*/
                 return item;//첫번째 아이템 반환
             }
 
-            function sort(array) {
+            function start(array) {
                 var heepArray = [];
 
                 //입력된 배열을 upHeep으로 heep배열에 정렬
@@ -200,46 +114,28 @@
                 //heep배열의 요소들을 downHeep하여 원래의 배열로 재정렬
                 for (var i = array.length - 1; i >= 0; i--) {
                     array[i] = downHeep(heepArray);
-                    tracer(i, array[i]);
+                    Tracer.tracer(i, array[i]);
                 }
-                traceOn()
+                return Tracer.traceOn(vm.roopSpeed);
             }
 
             return {
-                cleanTimeout: cleanTimeout,
-                start: sort,
-                init: init
+                start: start
             }
-        })(context);
+        })();
 
         function sortStart() {
-            if (roopState === true) {
-                resetArry();
-                Sort.start(vm.valueArry);
-            }
+            sortStop();
+            Sort.start(Tracer.valueArry);
         }
 
-        function resetArry() {
-            vm.valueArry = [10, 8, 9, 1, 4, 3, 6, 2, 7, 5];
-            context.clearRect(0, 0, vm.valueArry.length * 30, 60);
-            for (var i = 0; i < vm.valueArry.length; i++) {
-                context.strokeRect(i * 30, 0, 30, 30);
-                context.fillText(vm.valueArry[i] + "", i * 30 + 15, 15)
-            }
-        }
-
-        function roopStop() {
-            initRoopState();
-            resetArry()
-        }
-
-        function initRoopState() {
-            Sort.init();
-            roopState = true;
+        function sortStop() {
+            Tracer.resetLoop();
+            Tracer.resetArry();
         }
 
         $scope.$on('$destroy', function () {
-            Sort.cleanTimeout();
+            Tracer.cleanTimeout();
             Sort = null;
         });
     }
