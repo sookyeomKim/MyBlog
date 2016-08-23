@@ -864,7 +864,7 @@
                     reload();
                     var animator = $animateCss(base.$elem, {
                         to: {opacity: 1},
-                        duration: 0.2
+                        duration: 0.5
                     });
                     animator.start();
                     animator = null;
@@ -1078,11 +1078,9 @@
                 to: {
                     "left": value + "px"
                 },
-                duration: speed || base.options.slideSpeed,
-                end: function () {
-                }
+                duration: speed || base.options.slideSpeed
             });
-            animator.start().finally(function () {
+            animator.start().done(function () {
                 base.isCssFinish = true;
             });
             animator = null;

@@ -1,9 +1,18 @@
-body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-face {
+    font-family: 'bmjua';
+    src: url('../fonts/BMJUA_ttf.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/BMJUA_ttf.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/BMJUA_ttf.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/BMJUA.woff') format('woff'), /* Pretty Modern Browsers */
+    url('../fonts/BMJUA_ttf.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/BMJUA.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+* {
+    background-color: #fff;
+    font-family: 'bmjua', Arial, sans-serif;
     line-height: 1.6;
     word-spacing: 2px;
-    color: #333;
     font-size: 16px;
 }
 

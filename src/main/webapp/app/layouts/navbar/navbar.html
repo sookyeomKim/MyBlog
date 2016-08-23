@@ -1,4 +1,4 @@
-<nav class="navbar navbar-warning" role="navigation">
+<nav class="navbar navbar-ksk" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
@@ -8,13 +8,28 @@
                 <span class="icon-bar"></span>
             </button>
             <h1 class="navbar-brand">
-                <a  href="#/" ng-click="vm.collapseNavbar()">
-                    KSKBLOG
+                <a  href="/" ng-click="vm.collapseNavbar()">
+                    Web Front-end
                 </a>
             </h1>
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active="active">
+                    <a ui-sref="story" ng-click="vm.collapseNavbar()">
+                        <span>Stroy</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="introSite" ng-click="vm.collapseNavbar()">
+                        <span>Site</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="board" ng-click="vm.collapseNavbar()">
+                        <span>Board</span>
+                    </a>
+                </li>
                 <li ui-sref-active="active">
                     <a ui-sref="algorithm" ng-click="vm.collapseNavbar()">
                         <span>Algorithm</span>
@@ -23,6 +38,11 @@
                 <li ui-sref-active="active">
                     <a ui-sref="customPlugins" ng-click="vm.collapseNavbar()">
                         <span>Plugins</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="profile" ng-click="vm.collapseNavbar()">
+                        <span>MasterProfile</span>
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
@@ -40,6 +60,12 @@
                         <li ui-sref-active="active">
                             <a ui-sref="contact" ng-click="vm.collapseNavbar()">
                                 <span>Contact</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" >
+                            <a ui-sref="board" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span >Board</span>
                             </a>
                         </li>
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

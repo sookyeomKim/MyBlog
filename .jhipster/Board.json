@@ -1,0 +1,29 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "todaydate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "todaytime",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160822052217",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "board",
+    "pagination": "infinite-scroll"
+}

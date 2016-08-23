@@ -21,7 +21,8 @@ var gulp = require('gulp'),
     changed = require('gulp-changed'),
     gulpIf = require('gulp-if'),
     inject = require('gulp-inject'),
-    angularFilesort = require('gulp-angular-filesort');
+    angularFilesort = require('gulp-angular-filesort')/*,
+    connect = require('gulp-connect');*/
 
 var handleErrors = require('./gulp/handleErrors'),
     serve = require('./gulp/serve'),
@@ -243,3 +244,34 @@ gulp.task('build', ['clean'], function (cb) {
 });
 
 gulp.task('default', ['serve']);
+
+
+
+/*gulp.task('connect', function () {
+    connect.server({
+        /!*root: 'jqueryTest/WebContent',*!/
+        livereload: true
+    });
+});*/
+
+/*gulp.task('html', function () {
+    gulp.src('**!/!*.html')
+        .pipe(connect.reload());
+});
+
+gulp.task('css', function () {
+    gulp.src('**!/!*.css')
+        .pipe(connect.reload());
+});
+
+gulp.task('js', function () {
+    gulp.src('**!/!*.js').pipe(connect.reload());
+});
+
+gulp.task('watch', function () {
+    gulp.watch(['**!/!*.html'], ['html']);
+    gulp.watch(['**!/!*.css'], ['css']);
+    gulp.watch(['**!/!*.js'], ['js']);
+});*/
+
+/*gulp.task('default', ['connect', 'watch']);*/

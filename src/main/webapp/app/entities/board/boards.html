@@ -1,0 +1,258 @@
+<style>
+    .chat .chat-header {
+        padding: 20px;
+        border-bottom: 2px solid white;
+    }
+
+    .chat .chat-header img {
+        float: left;
+    }
+
+    .chat .chat-header .chat-about {
+        float: left;
+        padding-left: 10px;
+        margin-top: 6px;
+    }
+
+    .chat .chat-header .chat-with {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .chat .chat-header .chat-num-messages {
+        color: #92959E;
+    }
+
+    .chat .chat-header .fa-star {
+        float: right;
+        color: #D8DADF;
+        font-size: 20px;
+        margin-top: 12px;
+    }
+
+    .chat .chat-history {
+        padding: 30px 30px 20px;
+        border-bottom: 2px solid white;
+        height: 575px;
+    }
+
+    .chat .chat-history .message-data {
+        margin-bottom: 15px;
+    }
+
+    .chat .chat-history .message-data-time {
+        color: #a8aab1;
+        padding-left: 6px;
+    }
+
+    .chat .chat-history .message {
+        color: white;
+        padding: 18px 20px;
+        line-height: 26px;
+        font-size: 16px;
+        border-radius: 7px;
+        margin-bottom: 30px;
+        width: 90%;
+        position: relative;
+    }
+
+    .chat .chat-history .message:after {
+        bottom: 100%;
+        left: 7%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-bottom-color: #86BB71;
+        border-width: 10px;
+        margin-left: -10px;
+    }
+
+    .chat .chat-history .my-message {
+        background: #86BB71;
+    }
+
+    .chat .chat-history .other-message {
+        background: #94C2ED;
+    }
+
+    .chat .chat-history .other-message:after {
+        border-bottom-color: #94C2ED;
+        left: 93%;
+    }
+
+    .chat .chat-message {
+        padding: 30px;
+    }
+
+    .chat .chat-message textarea {
+        width: 100%;
+        border: none;
+        padding: 10px 20px;
+        font: 14px/22px "Lato", Arial, sans-serif;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        resize: none;
+    }
+
+    .chat .chat-message button {
+        float: right;
+        color: #94C2ED;
+        font-size: 16px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        background: #F2F5F8;
+    }
+
+    .chat .chat-message button:hover {
+        color: #75b1e8;
+    }
+
+    .online, .offline, .me {
+        margin-right: 3px;
+        font-size: 10px;
+    }
+
+    .online {
+        color: #86BB71;
+    }
+
+    .offline {
+        color: #E38968;
+    }
+
+    .me {
+        color: #94C2ED;
+    }
+
+    .align-left {
+        text-align: left;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .clearfix:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+</style>
+
+
+<div class="chat">
+    <div class="chat-message clearfix">
+        <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+            <textarea name="message-to-send" id="message-to-send" ng-model="vm.board.content"
+                      placeholder="요기에 할말 적어유" rows="3"></textarea>
+            <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp; <i
+            class="fa fa-file-image-o"></i>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div class="chat-history">
+        <ul infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+            <li class="clearfix" ng-repeat="board in vm.boards track by $index">
+                <div class="message-data" ng-class="{'align-right': board.name === vm.board.name}">
+                     <span class="message-data-name"><i
+                         class="fa fa-circle online"></i> {{board.name}}</span> <span
+                    class="message-data-time">{{board.todaytime | date :  "shortTime"}}, {{board.todaydate }}</span>
+                </div>
+                <div class="message"
+                     ng-class="{'other-message float-right': board.name === vm.board.name,'my-message': board.name !== vm.board.name}">
+                    {{board.content}}
+                </div>
+            </li>
+
+            <!--<li class="clearfix">
+                <div class="message-data align-right">
+                    <span class="message-data-time">10:14 AM, Today</span> &nbsp;
+                    &nbsp; <span class="message-data-name">Olia</span> <i
+                    class="fa fa-circle me"></i>
+
+                </div>
+                <div class="message other-message float-right">Well I am not
+                    sure. The rest of the team is not here yet. Maybe in an hour or
+                    so? Have you faced any problems at the last phase of the project?
+                </div>
+            </li>-->
+        </ul>
+    </div>
+</div>
+
+
+<!--<div>
+    <h2>Boards</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="board.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Board
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="todaydate"><span>Todaydate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="todaytime"><span>Todaytime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="board in vm.boards track by board.id">
+                    <td><a ui-sref="board-detail({id:board.id})">{{board.id}}</a></td>
+                    <td>{{board.name}}</td>
+                    <td>{{board.content}}</td>
+                        <td>{{board.todaydate | date:'mediumDate'}}</td>
+                    <td>{{board.todaytime}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="board-detail({id:board.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="board.edit({id:board.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="board.delete({id:board.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>-->

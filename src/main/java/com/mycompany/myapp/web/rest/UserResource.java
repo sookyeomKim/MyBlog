@@ -67,7 +67,6 @@ public class UserResource {
     @Inject
     private MailService mailService;
 
-
     @Inject
     private AuthorityRepository authorityRepository;
 
@@ -166,7 +165,7 @@ public class UserResource {
 
     /**
      * GET  /users : get all users.
-     * 
+     *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldnt be generated

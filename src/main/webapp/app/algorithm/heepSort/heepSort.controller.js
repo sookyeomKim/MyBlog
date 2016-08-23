@@ -28,7 +28,7 @@
             theme: "dracula",
             mode: "text/x-java"
         });
-        vm.canvasConfirm = Tracer.init('bubble-sort-drawing');
+        vm.canvasConfirm = Tracer.init('heep-sort-drawing');
         vm.valueArry = [];
         vm.sortStart = sortStart;
         vm.sortStop = sortStop;
