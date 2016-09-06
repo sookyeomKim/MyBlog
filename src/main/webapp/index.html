@@ -22,16 +22,16 @@
     <link rel="icon" type="image/png" sizes="192x192" href="content/images/favicon/android-icon-192x192.png">
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css"/>
-    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css"/>
-    <link rel="stylesheet" href="bower_components/codemirror/theme/dracula.css"/>
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="bower_components/codemirror/theme/dracula.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
-    <link rel="stylesheet" href="app/customPlugins/owlCaroulsel/plugin/css/owl.carousel.css">
-    <link rel="stylesheet" href="app/customPlugins/owlCaroulsel/plugin/css/owl.theme.css">
+    <link rel="stylesheet" href="app/page/customPlugins/owlCaroulsel/plugin/css/owl.carousel.css">
+    <link rel="stylesheet" href="app/page/customPlugins/owlCaroulsel/plugin/css/owl.theme.css">
     <!-- endbuild -->
 </head>
 <body ng-controller="globalController as vm">
@@ -91,8 +91,24 @@
 <!-- build:js app/app.js  -->
 <!-- inject:js -->
 <script src="app/app.module.js"></script>
-<script src="app/customPlugins/owlCaroulsel/plugin/js/carousel.drective.js"></script>
-<script src="app/customPlugins/owlCaroulsel/plugin/js/carousel.controller.js"></script>
+<script src="app/page/customPlugins/owlCaroulsel/plugin/js/carousel.drective.js"></script>
+<script src="app/page/customPlugins/owlCaroulsel/plugin/js/carousel.controller.js"></script>
+<script src="app/page/skgodi/skstory/skstory.state.js"></script>
+<script src="app/page/skgodi/skmember/skmember.state.js"></script>
+<script src="app/page/skgodi/skmember/skmember.controller.js"></script>
+<script src="app/page/skgodi/skmember/skmember-dialog.controller.js"></script>
+<script src="app/page/customPlugins/owlCaroulsel/owlCaroulsel.state.js"></script>
+<script src="app/page/customPlugins/owlCaroulsel/owlCaroulsel.controller.js"></script>
+<script src="app/page/algorithm/selectionSort/selectionSort.state.js"></script>
+<script src="app/page/algorithm/selectionSort/selectionSort.controller.js"></script>
+<script src="app/page/algorithm/quickSort/quickSort.state.js"></script>
+<script src="app/page/algorithm/quickSort/quickSort.controller.js"></script>
+<script src="app/page/algorithm/insertionSort/insertionSort.state.js"></script>
+<script src="app/page/algorithm/insertionSort/insertionSort.controller.js"></script>
+<script src="app/page/algorithm/bubbleSort/bubbleSort.state.js"></script>
+<script src="app/page/algorithm/bubbleSort/bubbleSort.controller.js"></script>
+<script src="app/page/algorithm/heepSort/heepSort.state.js"></script>
+<script src="app/page/algorithm/heepSort/heepSort.controller.js"></script>
 <script src="app/components/util/service/tracer.service.js"></script>
 <script src="app/components/util/service/parse-links.service.js"></script>
 <script src="app/components/util/service/pagination-util.service.js"></script>
@@ -106,11 +122,11 @@
 <script src="app/components/util/directive/jhi-item-count.directive.js"></script>
 <script src="app/components/util/directive/introPopup.directive.js"></script>
 <script src="app/components/util/directive/fixAside.directive.js"></script>
-<script src="app/account/social/directive/social.directive.js"></script>
 <script src="app/account/reset/request/reset.request.state.js"></script>
 <script src="app/account/reset/request/reset.request.controller.js"></script>
 <script src="app/account/reset/finish/reset.finish.state.js"></script>
 <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+<script src="app/account/social/directive/social.directive.js"></script>
 <script src="app/services/user/user.service.js"></script>
 <script src="app/services/auth/register.service.js"></script>
 <script src="app/services/auth/principal.service.js"></script>
@@ -123,6 +139,14 @@
 <script src="app/services/auth/auth.jwt.service.js"></script>
 <script src="app/services/auth/activate.service.js"></script>
 <script src="app/services/auth/account.service.js"></script>
+<script src="app/page/skgodi/skgodi.state.js"></script>
+<script src="app/page/skgodi/skgodi.controller.js"></script>
+<script src="app/page/profile/profile.state.js"></script>
+<script src="app/page/profile/profile.controller.js"></script>
+<script src="app/page/profile/profile-dialog.controller.js"></script>
+<script src="app/page/introSite/introSite.state.js"></script>
+<script src="app/page/customPlugins/customPlugins.state.js"></script>
+<script src="app/page/algorithm/algorithm.state.js"></script>
 <script src="app/layouts/navbar/navbar.controller.js"></script>
 <script src="app/layouts/navbar/active-link.directive.js"></script>
 <script src="app/layouts/error/error.state.js"></script>
@@ -138,8 +162,6 @@
 <script src="app/entities/board/board-dialog.controller.js"></script>
 <script src="app/entities/board/board-detail.controller.js"></script>
 <script src="app/entities/board/board-delete-dialog.controller.js"></script>
-<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.state.js"></script>
-<script src="app/customPlugins/owlCaroulsel/owlCaroulsel.controller.js"></script>
 <script src="app/components/util/truncate-words.filter.js"></script>
 <script src="app/components/util/truncate-characters.filter.js"></script>
 <script src="app/components/util/capitalize.filter.js"></script>
@@ -151,40 +173,30 @@
 <script src="app/components/form/pagination.constants.js"></script>
 <script src="app/components/form/minbytes.directive.js"></script>
 <script src="app/components/form/maxbytes.directive.js"></script>
-<script src="app/components/alert/alert.service.js"></script>
-<script src="app/components/alert/alert.directive.js"></script>
-<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/blocks/interceptor/notification.interceptor.js"></script>
 <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
 <script src="app/blocks/interceptor/auth.interceptor.js"></script>
 <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+<script src="app/components/alert/alert.service.js"></script>
+<script src="app/components/alert/alert.directive.js"></script>
+<script src="app/components/alert/alert-error.directive.js"></script>
 <script src="app/blocks/handlers/state.handler.js"></script>
 <script src="app/blocks/config/localstorage.config.js"></script>
 <script src="app/blocks/config/http.config.js"></script>
 <script src="app/blocks/config/compile.config.js"></script>
 <script src="app/blocks/config/alert.config.js"></script>
-<script src="app/algorithm/selectionSort/selectionSort.state.js"></script>
-<script src="app/algorithm/selectionSort/selectionSort.controller.js"></script>
-<script src="app/algorithm/quickSort/quickSort.state.js"></script>
-<script src="app/algorithm/quickSort/quickSort.controller.js"></script>
-<script src="app/algorithm/insertionSort/insertionSort.state.js"></script>
-<script src="app/algorithm/insertionSort/insertionSort.controller.js"></script>
-<script src="app/algorithm/heepSort/heepSort.state.js"></script>
-<script src="app/algorithm/heepSort/heepSort.controller.js"></script>
-<script src="app/algorithm/bubbleSort/bubbleSort.state.js"></script>
-<script src="app/algorithm/bubbleSort/bubbleSort.controller.js"></script>
 <script src="app/admin/user-management/user-management.state.js"></script>
 <script src="app/admin/user-management/user-management.controller.js"></script>
 <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
 <script src="app/admin/user-management/user-management-detail.controller.js"></script>
 <script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
+<script src="app/admin/logs/logs.state.js"></script>
+<script src="app/admin/logs/logs.service.js"></script>
+<script src="app/admin/logs/logs.controller.js"></script>
 <script src="app/admin/metrics/metrics.state.js"></script>
 <script src="app/admin/metrics/metrics.service.js"></script>
 <script src="app/admin/metrics/metrics.modal.controller.js"></script>
 <script src="app/admin/metrics/metrics.controller.js"></script>
-<script src="app/admin/logs/logs.state.js"></script>
-<script src="app/admin/logs/logs.service.js"></script>
-<script src="app/admin/logs/logs.controller.js"></script>
 <script src="app/admin/health/health.state.js"></script>
 <script src="app/admin/health/health.service.js"></script>
 <script src="app/admin/health/health.modal.controller.js"></script>
@@ -196,35 +208,25 @@
 <script src="app/admin/audits/audits.state.js"></script>
 <script src="app/admin/audits/audits.service.js"></script>
 <script src="app/admin/audits/audits.controller.js"></script>
+<script src="app/account/register/register.state.js"></script>
+<script src="app/account/register/register.controller.js"></script>
 <script src="app/account/social/social.state.js"></script>
 <script src="app/account/social/social.service.js"></script>
 <script src="app/account/social/social-register.controller.js"></script>
 <script src="app/account/social/social-auth.controller.js"></script>
 <script src="app/account/settings/settings.state.js"></script>
 <script src="app/account/settings/settings.controller.js"></script>
+<script src="app/account/activate/activate.state.js"></script>
+<script src="app/account/activate/activate.controller.js"></script>
 <script src="app/account/password/password.state.js"></script>
 <script src="app/account/password/password.controller.js"></script>
 <script src="app/account/password/password-strength-bar.directive.js"></script>
-<script src="app/account/register/register.state.js"></script>
-<script src="app/account/register/register.controller.js"></script>
-<script src="app/account/activate/activate.state.js"></script>
-<script src="app/account/activate/activate.controller.js"></script>
-<script src="app/story/story.state.js"></script>
-<script src="app/profile/profile.state.js"></script>
-<script src="app/profile/profile.controller.js"></script>
-<script src="app/profile/profile-dialog.controller.js"></script>
-<script src="app/main/main.state.js"></script>
-<script src="app/main/main.controller.js"></script>
-<script src="app/main/main-dialog.controller.js"></script>
 <script src="app/entities/entity.state.js"></script>
-<script src="app/customPlugins/customPlugins.state.js"></script>
-<script src="app/algorithm/algorithm.state.js"></script>
 <script src="app/admin/admin.state.js"></script>
 <script src="app/account/account.state.js"></script>
 <script src="app/app.state.js"></script>
 <script src="app/app.controller.js"></script>
 <script src="app/app.constants.js"></script>
-<script src="app/introSite/introSite.state.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 

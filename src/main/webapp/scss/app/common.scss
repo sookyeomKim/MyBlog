@@ -7,10 +7,10 @@ header {
     background-color: #fff;
 }
 
-.navbar-ksk li a:hover {
+.navbar-ksk li a:hover,.navbar-ksk li.active {
+    height: 60px;
     color: #d80546 !important;
-    border-bottom: 2px solid #d80546;
-    margin-bottom: -2px;
+    border-bottom: 4px solid #d80546;
 }
 
 /*전체 컨테이너*/

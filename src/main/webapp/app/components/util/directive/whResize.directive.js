@@ -25,8 +25,8 @@ function whResize($window) {
             return false
         }
         var wh;
-        var domWidth = $window.document.documentElement.offsetWidth;
-        var domHeight = $window.document.documentElement.offsetHeight;
+        var domWidth = $window.document.documentElement.clientWidth;
+        var domHeight = $window.document.documentElement.clientHeight;
         var watchCleanUp;
 
         startRepositioningOnResize();
@@ -34,7 +34,7 @@ function whResize($window) {
         watchCleanUp = sco.$watchCollection(function getValue() {
             return ([domWidth, domHeight])
         }, function (newVal) {
-            resizeWithHeightOffset(newVal)
+            resizeWithHeightOffset(newVal);
         });
 
         function resizeWithHeightOffset(whObj) {
@@ -44,7 +44,6 @@ function whResize($window) {
             }
             wh = sco.propName.match('width') ? whObj[0] : whObj[1];
             wh = wh * (Number(sco.ratio) / 100);
-
             if (sco.margin) {
                 wh = wh - (wh * (Number(sco.margin) / 100));
             }
@@ -53,8 +52,8 @@ function whResize($window) {
 
         function startRepositioningOnResize() {
             function refreshWidthNheight() {
-                domWidth = $window.document.documentElement.offsetWidth;
-                domHeight = $window.document.documentElement.offsetHeight;
+                domWidth = $window.document.documentElement.clientWidth;
+                domHeight = $window.document.documentElement.clientHeight;
                 sco.$apply()
             }
 

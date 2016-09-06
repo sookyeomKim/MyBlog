@@ -23,8 +23,7 @@
                     if ($window.sessionStorage.getItem('intro-popup') === 'on') {
                         angular.element(this).remove();
                     } else {
-                        var moveButton = '<a href="/" id="go-button">Our\'s story &gt;</a>';
-                        $window.sessionStorage.setItem('intro-popup', 'on');
+                        var moveButton = '<a id="go-button" ui-sref="skstory">Our\'s story &gt;</a>';
                         angular.element($document).find('body').css({'overflow': 'hidden'});
                         angular.element(el).css({
                             'background': 'url("content/images/first-view-img.jpg") no-repeat center center fixed',
@@ -40,6 +39,7 @@
                             'background-size': 'cover'
                         }).addClass('first-view-wrap').find('.overlay').append(moveButton);
                         angular.element(el).find('#go-button').on('click', function () {
+                            $window.sessionStorage.setItem('intro-popup', 'on');
                             angular.element($document).find('body').removeAttr('style');
                             angular.element(el).fadeOut(function () {
                                 angular.element(this).remove();

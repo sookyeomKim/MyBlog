@@ -1,0 +1,239 @@
+<div class="row custom" ng-cloak>
+    <aside class="aside-container non-mobile col-sm-3" ng-if="!vm.isXs" role="complementary">
+        <div fix-aside wh-resize prop-name="width" ratio="25" max-width="1250">
+            <div class="aside-outer-scroller">
+                <div class="aside-inner-scroller" wh-resize prop-name="height" ratio="100">
+                    <div class="profile-wrap">
+                        <div class="img-wrap">
+                            <img wh-resize
+                                 prop-name="width"
+                                 ratio="25"
+                                 max-width="1250"
+                                 margin="10"
+                                 src="/content/images/ksk.jpg"
+                                 alt="썸네일 수겸이 프로필사진">
+                        </div>
+                        <div class="info-wrap">
+                            <p>
+                                <a href="https://github.com/sookyumKim" target="_blank">https://github.com</a>
+                            </p>
+                            <p>
+                                <a ngclipboard
+                                   uib-tooltip="클릭시 복사"
+                                   data-clipboard-text="ikks06luck@naver.com">ikks06luck@naver.com</a>
+                            </p>
+                            <p><a href="tel:010-3328-8344">010-3328-8344</a></p>
+                        </div>
+                    </div>
+                    <nav>
+                        <ul class="side-navbar">
+                            <li>
+                                <a href="#introduce" du-smooth-scroll du-scrollspy>Introduce
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#timeline" du-smooth-scroll du-scrollspy>Timeline
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#portfolio" du-smooth-scroll du-scrollspy>Portfolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact" du-smooth-scroll du-scrollspy>Contact
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <main class="main-container col-sm-9 col-xs-12" role="main">
+        <section id="introduce">
+            <h1 class="first-text">
+                <p>김수겸</p>
+
+                <p>Kim Sukyum</p>
+            </h1>
+            <div class="second-text">
+                <div class="left-text">
+                    <p><b>출생</b>_89.06.20 평택 출생</p>
+
+                    <p><b>특기</b>_물고 늘어지기</p>
+
+                    <p><b>취미</b>_두손 놓고 한강라이딩, 안주 요리,<br>영화보고 감상평 남기기, 1박 2일 시청</p>
+
+                    <p><b>좌우명</b>_도전은 이롭다</p>
+                </div>
+            </div>
+
+            <div class="third-text">
+                <div class="row" layout-wrap>
+                    <div class="left-text col-sm-6">
+                        <h2 class="left-title">
+                            DETERMINATION
+                        </h2>
+
+                        <p>
+                            저는 자신의 스킬을 적당히 뽐내다가 나중에 치킨이나 팔아야지 하는 단순 밥벌이용으로 생각하는 개발자의 길을 지양합니다
+                        </p>
+                    </div>
+                    <div class="right-text col-sm-6">
+                        <h2 class="right-title">
+                            PASSION
+                        </h2>
+
+                        <p>
+                            내가 만든 것으로 누군가 잘 사용해 주고 편해졌으면 좋겠고 현재 그리고 미래의 삶의 안락함은 내 손과 머리에 달려있다는 저만의
+                            허세가득한 프라이드를 가지며 살아가는 뼛속까지 개발자이고 싶은 개발자입니다
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="timeline">
+            <ul class="wrap">
+                <li>
+                    <input type="radio" checked id="s1" name="section"/>
+                    <span class="date">2002-02</span>
+                    <span class="circle"></span>
+                    <div class="content">
+                        <label class="lab" for="s1">평택 합정 초등학교 졸업</label>
+                        <p>과학상자, 물로켓 대회</p>
+                        <p>게임 광</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" id="s2" name="section"/>
+                    <span class="date">2005-02</span>
+                    <span class="circle"></span>
+                    <div class="content">
+                        <label class="lab" for="s2">평택 세교 중학교 졸업</label>
+                        <p>한지공예의 달인</p>
+                        <p>컴퓨터 AS의 달인</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" id="s3" name="section"/>
+                    <span class="date">2008-02</span>
+                    <span class="circle"></span>
+                    <div class="content">
+                        <label class="lab" for="s3">평택 기계 공업고등학교 졸업</label>
+                        <p>PSP 커스텀 펌웨어 장사꾼</p>
+                        <p>수시 1차에 합격하자!</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" id="s4" name="section"/>
+                    <span class="date">2015-02</span>
+                    <span class="circle"></span>
+                    <div class="content">
+                        <label class="lab" for="s4">충주 한국교통대학교 졸업</label>
+                        <p>2사단 전역</p>
+                        <p>캡스톤 디자인 기획과 개발</p>
+                        <p>UX 디자인 강의 수료</p>
+                        <p>Java 개발자 교육 과정 수료</p>
+                        <p>2014 공개소프트웨어 대회</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" id="s5" name="section"/>
+                    <span class="date">2016-현재</span>
+                    <span class="circle"></span>
+                    <div class="content">
+                        <label class="lab" for="s5">창업 그리고 자기 개발</label>
+                        <p>학원 동기와의 스터디</p>
+                        <p>도전! 창업</p>
+                        <p>컴퓨터 공학 전공 공부</p>
+                        <p>취업 준비</p>
+                        <p>코드 리뷰, 블로그 개발, 삽질을 통한 개발 공부</p>
+                        <p>SK 고용디딤돌</p>
+                        <p>(주)엘씨벤처스 취업!</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section id="portfolio">
+            <div class="first" wh-resize prop-name="width" ratio="60" max-width="1170">
+                <a href="https://www.dropbox.com/s/arndn3aoajy61y8/890620_KimSooKyum_Portfolio.pdf?dl=0"
+                   target="_blank">
+                    <img src="/content/images/portfolio1.jpg" alt="썸네일 포트폴리오1">
+                </a>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="contact-wrap">
+                <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="form-group" ng-show="vm.contact.id">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id"
+                               ng-model="vm.contact.id" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_email">이메일</label>
+                        <input type="text" class="form-control" name="email" id="field_email"
+                               ng-model="vm.contact.email"
+                               required/>
+                        <div ng-show="editForm.email.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.email.$error.required">
+                                빈칸은 nope!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_massage">메세지</label>
+                        <input type="text" class="form-control" name="massage" id="field_massage"
+                               ng-model="vm.contact.massage"
+                               required/>
+                        <div ng-show="editForm.massage.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.massage.$error.required">
+                                빈칸은 nope!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" ng-disabled="editForm.$invalid || isSaving"
+                                class="btn btn-warning btn-raised" role="button">
+                            <span>보내기</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</div>
+
+<aside class="aside-container mobile" ng-if="vm.isXs" role="complementary">
+    <div class="btn-group btn-group-justified btn-group-raised">
+        <a class="btn btn-warning" ui-sref="profile.modal">
+            <div uib-tooltip="연락처">
+                <i class="material-icons">&#xE0CF;</i>
+            </div>
+        </a>
+        <a href="#introduce" class="btn" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="소개">
+                <i class="material-icons">&#xE8A6;</i>
+            </div>
+        </a>
+        <a href="#timeline" class="btn btn-warning" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="타임라인">
+                <i class="material-icons">&#xE922;</i>
+            </div>
+        </a>
+        <a href="#portfolio" class="btn" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="포트폴리오">
+                <i class="material-icons">&#xE560;</i>
+            </div>
+        </a>
+        <a href="#contact" class="btn btn-warning" du-smooth-scroll du-scrollspy>
+            <div uib-tooltip="메세지 보내기">
+                <i class="material-icons">&#xE0B9;</i>
+            </div>
+        </a>
+    </div>
+</aside>
+
